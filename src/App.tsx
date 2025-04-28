@@ -20,6 +20,11 @@ import { Creations } from "./page/kakaotheme/Creations";
 import { HomePage } from "./page/home/HomePage";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { Login } from "./page/auth/Login";
+import { Register } from "./page/auth/Register";
+import { FindEmail } from "./page/auth/FindEmail";
+import { FindPassword } from "./page/auth/FindPassword";
+import { AuthLayout } from "./components/layout/AuthLayout";
+import { SetPassword } from "./page/auth/SetPassword";
 
 function App() {
   return (
@@ -28,8 +33,13 @@ function App() {
         <SidebarProvider>
           <Routes>
             {/* Public Routes */}
-            <Route path="/auth/login" element={<Login />} />
-
+            <Route path="/auth" element={<AuthLayout />}>
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+              <Route path="find-password" element={<FindPassword />} />
+              <Route path="find-email" element={<FindEmail />} />
+              <Route path="set-password" element={<SetPassword />} />
+            </Route>
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
               <Route element={<Layout />}>

@@ -125,6 +125,8 @@
   --color-kakao-dark: #333b58;
   --color-kakao-black: #1e1e1e;
   --color-kakao-text: #333333;
+  --color-kakao-blue: #2aa0ff;
+  /*--color-kakao-blue: #028EFE; */
 }
 
 .dark {

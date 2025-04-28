@@ -75,21 +75,27 @@ export const Header = () => {
   const { parentTitle, currentTitle } = getPageTitle(location.pathname);
 
   return (
-    <div className="flex items-center px-4 py-2 border-b border-gray-300">
-      <div className="flex md:hidden">
-        <SidebarTrigger />
-        <span className="px-2">|</span>
+    <div className="flex justify-between items-center px-4 py-2 border-b border-gray-300">
+      <div className="flex">
+        <div className="flex md:hidden">
+          <SidebarTrigger />
+          <span className="px-2">|</span>
+        </div>
+        <div className="flex items-center text-lg font-semibold">
+          {parentTitle && (
+            <>
+              <span>{parentTitle}</span>
+              <ChevronRight className="w-4 h-4 mx-1" />
+            </>
+          )}
+          <span>{currentTitle}</span>
+        </div>
       </div>
-      <div className="flex items-center text-lg font-semibold">
-        {parentTitle && (
-          <>
-            <span>{parentTitle}</span>
-            <ChevronRight className="w-4 h-4 mx-1" />
-          </>
-        )}
-        <span>{currentTitle}</span>
+
+      <div className="flex flex-row gap-4">
+        <div className="">불러오기</div>
+        <div className="">저장하기</div>
       </div>
-      <div className="w-8" /> {/* Spacer for balance */}
     </div>
   );
 };

@@ -5,8 +5,6 @@ export const useAuth = () => {
 
   useEffect(() => {
     // 여기서 토큰이나 세션 체크 로직을 구현합니다
-    const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token);
   }, []);
 
   return {
