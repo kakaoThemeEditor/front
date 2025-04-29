@@ -1,21 +1,74 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { KakaoLoginButton } from "@/components/button/KakaoLoginButton";
+import { APIClient } from "@/api/ApiHandler";
+import { toast } from "sonner";
+import Cookies from "js-cookie";
+import { useMutation } from "@tanstack/react-query";
+import { MOCK_COOKIE_KEYS } from "@/mocks/handlers";
+import { useAuth } from "@/hooks/useAuth";
+import { CheckCircleIcon } from "lucide-react";
+
+const isMockServer = import.meta.env.VITE_MOCK_SERVER === "true";
+
+const getCookieKeys = () => {
+  if (isMockServer) {
+    return {
+      accessToken: MOCK_COOKIE_KEYS.ACCESS_TOKEN,
+      refreshToken: MOCK_COOKIE_KEYS.REFRESH_TOKEN,
+    };
+  }
+  return {
+    accessToken: "kakao_access_token",
+    refreshToken: "kakao_refresh_token",
+  };
+};
 
 // sliderStyles 커스텀 스타일
 export const Login = () => {
-  const { setIsAuthenticated } = useAuth();
+  const { isAuthenticated, setIsAuthenticated } = useAuth();
+  console.log(isAuthenticated);
   const navigate = useNavigate();
+  const cookieKeys = getCookieKeys();
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const loginMutation = useMutation({
+    mutationFn: async (data: { email: string; password: string }) => {
+      const response = await APIClient.post("/auth/login", data);
+      return response.data;
+    },
+    onSuccess: (data) => {
+      const { accessToken, refreshToken } = data;
+      Cookies.set(cookieKeys.accessToken, accessToken);
+      Cookies.set(cookieKeys.refreshToken, refreshToken);
+
+      toast.success("환영합니다!", {
+        description: "카카오 에디터에 성공적으로 로그인했습니다.",
+        duration: 2000,
+        className: "bg-kakao-yellow text-white",
+        position: "top-center",
+      });
+      setIsAuthenticated(true);
+      navigate("/");
+    },
+    onError: (error: any) => {
+      toast.error("로그인 실패", {
+        description: error.response?.data?.message || "이메일과 비밀번호를 확인해주세요.",
+        duration: 2000,
+        className: "bg-kakao-dark text-white",
+        position: "top-center",
+      });
+    },
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    loginMutation.mutate(formData);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,8 +125,12 @@ export const Login = () => {
           </div>
           <div className="flex flex-col gap-2">
             <div>
-              <Button type="submit" className="w-full bg-kakao-dark hover:bg-kakao-dark/90 text-white">
-                로그인
+              <Button
+                type="submit"
+                className="w-full bg-kakao-dark hover:bg-kakao-dark/90 text-white"
+                disabled={loginMutation.isPending}
+              >
+                {loginMutation.isPending ? "로그인 중..." : "로그인"}
               </Button>
             </div>
           </div>
@@ -90,7 +147,6 @@ export const Login = () => {
               type="button"
               onClick={() => {
                 // 카카오 로그인 처리
-                console.log("카카오 로그인");
               }}
             />
           </div>

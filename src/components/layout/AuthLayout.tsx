@@ -18,7 +18,7 @@ const sliderStyles = `
 `;
 export const AuthLayout = () => {
   const { isAuthenticated } = useAuth();
-
+  console.log("isAuthenticated layout: ", isAuthenticated);
   const settings = {
     dots: false,
     infinite: true,
@@ -37,6 +37,7 @@ export const AuthLayout = () => {
     pauseOnFocus: true,
     pauseOnHover: true,
   };
+
   if (isAuthenticated) {
     return <Navigate to="/" />;
   }
