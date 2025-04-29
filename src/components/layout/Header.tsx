@@ -91,11 +91,6 @@ export const Header = () => {
           <span>{currentTitle}</span>
         </div>
       </div>
-
-      <div className="flex flex-row gap-4">
-        <div className="">불러오기</div>
-        <div className="">저장하기</div>
-      </div>
     </div>
   );
 };

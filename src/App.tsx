@@ -15,7 +15,7 @@ import { Preview } from "@/page/editor/Preview";
 import { Notification } from "@/page/notification/Notification";
 import { Settings } from "@/page/setting/Settings";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { KakaoEditor } from "./page/editor/kakaoEditor/KakaoEditor";
+import { KakaoEditor } from "./page/editor/KakaoEditor";
 import { Creations } from "./page/kakaotheme/Creations";
 import { HomePage } from "./page/home/HomePage";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";

@@ -1,37 +1,52 @@
 import { useState } from "react";
-import {
-  IoChevronBack,
-  IoSearch,
-  IoMenu,
-  IoBackspaceOutline,
-} from "react-icons/io5";
-import SpeechBubble from "../ui/SpeechBubble";
+import { IoChevronBack, IoSearch, IoMenu, IoBackspaceOutline } from "react-icons/io5";
+import SpeechBubble from "../button/SpeechBubble";
+import CircleButton from "../button/CircleButton";
+import { PassCodeEditTable } from "../table/PassCodeEditTable";
+import { Button } from "../ui/button";
+import clsx from "clsx";
 
 // 편집 가능한 영역의 타입 정의
-type EditableArea = {
-  id: string;
-  name: string;
-  color: string;
-  description: string;
-};
+interface ThemeValues {
+  backgroundColor: string;
+  iosBackgroundImage: string;
+  iosTextColor: string;
+  iosBulletFirstImage: string;
+  iosBulletSecondImage: string;
+  iosBulletThirdImage: string;
+  iosBulletFourthImage: string;
+  iosBulletSelectedFirstImage: string;
+  iosBulletSelectedSecondImage: string;
+  iosBulletSelectedThirdImage: string;
+  iosBulletSelectedFourthImage: string;
+  iosKeypadBackgroundColor: string;
+  iosKeypadTextNormalColor: string;
+  iosKeypadNumberHighlightedImage: string;
+}
 
 export default function PassCode() {
-  const KeyPad = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "",
-    "0",
-    "delete",
-  ];
+  const [themeValues, setThemeValues] = useState<ThemeValues>({
+    backgroundColor: "",
+    iosBackgroundImage: "",
+    iosTextColor: "",
+    iosBulletFirstImage: "",
+    iosBulletSecondImage: "",
+    iosBulletThirdImage: "",
+    iosBulletFourthImage: "",
+    iosBulletSelectedFirstImage: "",
+    iosBulletSelectedSecondImage: "",
+    iosBulletSelectedThirdImage: "",
+    iosBulletSelectedFourthImage: "",
+    iosKeypadBackgroundColor: "",
+    iosKeypadTextNormalColor: "",
+    iosKeypadNumberHighlightedImage: "",
+  });
+
+  const [activeSelected, setActiveSelected] = useState<boolean>(false);
+
+  const KeyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", "delete"];
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-2 w-full h-full">
+    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] w-full h-full">
       {/* 왼쪽 */}
       <div className="flex justify-center items-center">
         <div
@@ -43,52 +58,164 @@ export default function PassCode() {
           `,
           }}
         >
-          <div className="relative flex flex-col justify-center size-full bg-red-200 rounded-2xl border-2 border-white">
-            <div className="absolute top-7 left-5 w-5 h-5 bg-kakao-blue rounded-full flex justify-center items-center text-white text-sm font-bold border-[1px] border-white">
-              1
+          <div className="relative flex flex-col justify-center size-full  rounded-2xl border-2 border-white">
+            <div className="w-5 h-5 absolute top-7 left-5">
+              <CircleButton Number={1} />
             </div>
-            <div className="h-3/5  flex flex-col justify-center items-center">
+
+            <div
+              className={clsx(
+                "h-3/5  flex flex-col justify-center items-center rounded-t-2xl ",
+                themeValues.backgroundColor || "bg-red-200"
+              )}
+              style={{
+                backgroundColor: themeValues.backgroundColor,
+                backgroundImage: `url(${themeValues.iosBackgroundImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
               <div className="relative">
-                <div className="absolute top-7 -left-11 w-10 h-4">
-                  <SpeechBubble direction="right">2</SpeechBubble>
+                <div className="absolute top-9.5 -left-9 w-8 h-4">
+                  <SpeechBubble direction="right">
+                    <span className="text-sm">2</span>
+                  </SpeechBubble>
                 </div>
-                <div className="text-2xl font-bold mt-8 mb-4">비밀번호</div>
+                <div
+                  className={clsx("text-2xl font-bold mt-8 mb-4", themeValues.iosTextColor || "text-black")}
+                  style={{ color: themeValues.iosTextColor }}
+                >
+                  비밀번호
+                </div>
               </div>
-              <div className="text-sm text-gray-600 mb-4">
-                카카오톡 암호를 입력해주세요.
-              </div>
+              <div className="text-sm text-gray-600 mb-4">카카오톡 암호를 입력해주세요.</div>
               <div className="flex gap-2">
-                {Array(4)
-                  .fill(0)
-                  .map((_, index) => (
-                    <div
-                      key={index}
-                      className="w-7 h-7 bg-gray-200 rounded-full"
-                    ></div>
-                  ))}
+                <div
+                  className={clsx("relative w-7 h-7 bg-gray-200 rounded-full ")}
+                  style={{
+                    backgroundImage: `url(${
+                      activeSelected ? themeValues.iosBulletSelectedFirstImage : themeValues.iosBulletFirstImage
+                    })`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  <div className="absolute top-0 -left-9 w-8 h-4">
+                    <SpeechBubble direction="right">
+                      <span className="text-sm">4</span>
+                    </SpeechBubble>
+                  </div>
+                </div>
+                <div
+                  className="relative w-7 h-7 bg-gray-200 rounded-full"
+                  style={{
+                    backgroundImage: `url(${
+                      activeSelected ? themeValues.iosBulletSelectedSecondImage : themeValues.iosBulletSecondImage
+                    })`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                ></div>
+                <div
+                  className="relative w-7 h-7 bg-gray-200 rounded-full"
+                  style={{
+                    backgroundImage: `url(${
+                      activeSelected ? themeValues.iosBulletSelectedThirdImage : themeValues.iosBulletThirdImage
+                    })`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                >
+                  <div className="absolute top-8 left-0 w-8 h-4">
+                    <SpeechBubble direction="top">
+                      <span className="text-sm">3</span>
+                    </SpeechBubble>
+                  </div>
+                </div>
+                <div
+                  className="relative w-7 h-7 bg-gray-200 rounded-full"
+                  style={{
+                    backgroundImage: `url(${
+                      activeSelected ? themeValues.iosBulletSelectedFourthImage : themeValues.iosBulletFourthImage
+                    })`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                ></div>
               </div>
             </div>
-            <div className="h-2/5 border-3 border-kakao-blue rounded-2xl p-3 grid grid-cols-3 gap-2">
-              {KeyPad.map((key, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col justify-center items-center font-bold text-xl"
-                >
-                  {key === "delete" ? (
-                    <IoBackspaceOutline className="text-2xl" />
-                  ) : (
-                    key
-                  )}
+            <div
+              className="relative h-2/5 w-full"
+              style={{
+                backgroundColor: themeValues.iosKeypadBackgroundColor,
+              }}
+            >
+              <div className="relative h-full w-full border-3 border-kakao-blue rounded-2xl p-3 grid grid-cols-3 gap-2 place-items-center">
+                <div className="w-5 h-5 absolute -left-3 top-1/2 transform -translate-y-1/2">
+                  <CircleButton Number={5} />
                 </div>
-              ))}
+                <div className="flex flex-col justify-center items-center font-bold text-xl">1</div>
+                <div
+                  className="relative flex flex-col justify-center items-center font-bold text-xl"
+                  style={{
+                    color: themeValues.iosKeypadTextNormalColor,
+                  }}
+                >
+                  2
+                  <div className="absolute top-1/2 transform -translate-y-1/2 -left-10 w-8 h-4">
+                    <SpeechBubble direction="right">
+                      <span className="text-sm">6</span>
+                    </SpeechBubble>
+                  </div>
+                </div>
+                <div className="flex flex-col justify-center items-center font-bold text-xl">3</div>
+                <div className="flex flex-col justify-center items-center font-bold text-xl">4</div>
+                <div
+                  className="relative flex flex-col justify-center items-center font-bold text-xl "
+                  style={{
+                    backgroundImage: `url(${themeValues.iosKeypadNumberHighlightedImage})`,
+                    backgroundSize: "contain",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    width: "60px",
+                    height: "60px",
+                  }}
+                >
+                  5
+                  <div className="absolute top-1/2 transform -translate-y-1/2 -left-6 w-8 h-4">
+                    <SpeechBubble direction="right">
+                      <span className="text-sm">7</span>
+                    </SpeechBubble>
+                  </div>
+                </div>
+                <div className="flex flex-col justify-center items-center font-bold text-xl">6</div>
+                <div className="flex flex-col justify-center items-center font-bold text-xl">7</div>
+                <div className="flex flex-col justify-center items-center font-bold text-xl">8</div>
+                <div className="flex flex-col justify-center items-center font-bold text-xl">9</div>
+                <div className="flex flex-col justify-center items-center font-bold text-xl"></div>
+                <div className="flex flex-col justify-center items-center font-bold text-xl">1</div>
+                <div className="flex flex-col justify-center items-center font-bold text-xl">
+                  <IoBackspaceOutline className="text-2xl" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
       {/* 왼쪽 끝 */}
       {/* 오른쪽 */}
-      <div className="w-full h-full p-8 bg-white rounded-lg shadow-lg">
-        <h2 className="text-xl font-bold mb-4">테마 편집</h2>
+      <div className="w-full h-full p-6 bg-white rounded-lg shadow-lg">
+        <div className="flex justify-between">
+          <h1 className="font-bold text-2xl mb-4">PassCode 편집</h1>
+          <Button>저장하기</Button>
+        </div>
+        <PassCodeEditTable
+          themeValues={themeValues}
+          setThemeValues={setThemeValues}
+          activeSelected={activeSelected}
+          setActiveSelected={setActiveSelected}
+        />
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Chatting from "@/components/kakaoScreens/Chatting";
 import PassCode from "@/components/kakaoScreens/PassCode";
-
+import TabBar from "@/components/kakaoScreens/TabBar";
+import MainviewStyle1 from "@/components/kakaoScreens/MainviewStyle1";
 export const KakaoEditor = () => {
-  const [screen, setScreen] = useState<string>("passcode");
+  const [screen, setScreen] = useState<string>("mainview1");
 
   function renderMatches(screen: string) {
     switch (screen) {
@@ -11,6 +12,10 @@ export const KakaoEditor = () => {
         return <Chatting />;
       case "passcode":
         return <PassCode />;
+      case "tabbar":
+        return <TabBar />;
+      case "mainview1":
+        return <MainviewStyle1 />;
       default:
         return null;
     }
