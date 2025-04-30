@@ -1,14 +1,12 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { EyeIcon, EyeOff } from "lucide-react";
 
 // sliderStyles 커스텀 스타일
 
 export const SetPassword = () => {
-  const { setIsAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     email: "",

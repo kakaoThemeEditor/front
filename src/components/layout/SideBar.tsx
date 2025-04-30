@@ -20,7 +20,7 @@ import {
   LaughIcon,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import { useAuth } from "@/hooks/useAuth";
 import {
   Sidebar,
   SidebarContent,
@@ -61,6 +61,7 @@ interface IsOpenOptionsProps {
 
 export function AppSidebar() {
   const { state, open, setOpen, openMobile, setOpenMobile, toggleSidebar } = useSidebar();
+  const { logout } = useAuth();
 
   const [isOpenOptions, setIsOpenOptions] = useState<IsOpenOptionsProps>({
     main: true,
@@ -269,7 +270,7 @@ export function AppSidebar() {
                       </Link>
                     </SidebarMenuItem>
                     <SidebarMenuItem className={clsx(state === "expanded" && "px-2")}>
-                      <SidebarMenuButton>
+                      <SidebarMenuButton onClick={logout}>
                         <LogOut className="mr-2 h-4 w-4" />
                         <span>로그아웃</span>
                       </SidebarMenuButton>

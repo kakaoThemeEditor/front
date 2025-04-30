@@ -1,15 +1,33 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { EyeIcon, EyeOff } from "lucide-react";
+import { APIClient } from "@/api/ApiHandler";
+import { toast } from "sonner";
+import Cookies from "js-cookie";
+import { MOCK_COOKIE_KEYS } from "@/mocks/handlers";
+
+const isMockServer = import.meta.env.VITE_MOCK_SERVER === "true";
+
+const getCookieKeys = () => {
+  if (isMockServer) {
+    return {
+      accessToken: MOCK_COOKIE_KEYS.ACCESS_TOKEN,
+      refreshToken: MOCK_COOKIE_KEYS.REFRESH_TOKEN,
+    };
+  }
+  return {
+    accessToken: "kakao_access_token",
+    refreshToken: "kakao_refresh_token",
+  };
+};
 
 // sliderStyles 커스텀 스타일
 
 export const Register = () => {
-  const { setIsAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const cookieKeys = getCookieKeys();
   const [formData, setFormData] = React.useState({
     email: "",
     emailVerify: "",
@@ -19,9 +37,45 @@ export const Register = () => {
   const [sendEmailVerify, setSendEmailVerify] = React.useState(false);
   const [revealPassword, setRevealPassword] = React.useState(false);
   const [revealPasswordCheck, setRevealPasswordCheck] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      // 이메일 인증 확인
+      if (!sendEmailVerify) {
+        toast.error("이메일 인증이 필요합니다.");
+        return;
+      }
+
+      // 비밀번호 확인
+      if (formData.password !== formData.passwordCheck) {
+        toast.error("비밀번호가 일치하지 않습니다.");
+        return;
+      }
+
+      // 회원가입 요청
+      const response = await APIClient.post("/auth/register", {
+        email: formData.email,
+        password: formData.password,
+        verificationCode: formData.emailVerify,
+      });
+
+      const { accessToken, refreshToken, user } = response.data;
+
+      // 토큰 저장
+      Cookies.set(cookieKeys.accessToken, accessToken);
+      Cookies.set(cookieKeys.refreshToken, refreshToken);
+
+      toast.success("회원가입 성공!");
+      navigate("/");
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "회원가입에 실패했습니다.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,9 +86,17 @@ export const Register = () => {
     }));
   };
 
-  const handleEmailVerify = () => {
-    // TODO: Implement email verification logic
-    setSendEmailVerify(true);
+  const handleEmailVerify = async () => {
+    try {
+      await APIClient.post("/auth/verify-email", {
+        email: formData.email,
+        code: "123456", // 테스트용 고정 코드
+      });
+      setSendEmailVerify(true);
+      toast.success("이메일 인증이 완료되었습니다.");
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "이메일 인증에 실패했습니다.");
+    }
   };
 
   return (
@@ -66,6 +128,7 @@ export const Register = () => {
                   type="button"
                   onClick={handleEmailVerify}
                   className="mt-1 bg-kakao-dark hover:bg-kakao-dark/90 text-white whitespace-nowrap"
+                  disabled={!formData.email}
                 >
                   이메일 인증
                 </Button>
@@ -152,9 +215,11 @@ export const Register = () => {
           <Button
             type="submit"
             className="w-full bg-kakao-dark hover:bg-kakao-dark/90 text-white py-2 rounded-md"
-            disabled={!formData.email || !formData.emailVerify || !formData.password || !formData.passwordCheck}
+            disabled={
+              isLoading || !formData.email || !formData.emailVerify || !formData.password || !formData.passwordCheck
+            }
           >
-            회원가입
+            {isLoading ? "회원가입 중..." : "회원가입"}
           </Button>
         </form>
 
