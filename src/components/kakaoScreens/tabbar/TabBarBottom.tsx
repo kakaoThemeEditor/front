@@ -15,10 +15,6 @@ export function TabBarBottom({
   isActive: { [key: string]: boolean };
   setIsActive: (isActive: { [key: string]: boolean }) => void;
 }) {
-  console.log(
-    !!isActive.iosFriendsNormalIconImage && !!themeValues.iosFriendsNormalIconImage,
-    !!!isActive.iosFriendsNormalIconImage && !!themeValues.iosFriendsSelectedIconImage
-  );
   return (
     <div
       className="relative flex h-20 p-4 justify-between mt-auto"

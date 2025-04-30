@@ -1,5 +1,6 @@
 import { ThemeValues } from "./PassCode";
 import SpeechBubble from "../../button/SpeechBubble";
+import clsx from "clsx";
 
 interface PassCodeBulletsProps {
   themeValues: ThemeValues;
@@ -7,15 +8,27 @@ interface PassCodeBulletsProps {
 }
 
 export function PassCodeBullets({ themeValues, activeSelected }: PassCodeBulletsProps) {
+  console.log(
+    activeSelected && !!themeValues.iosBulletSelectedFirstImage,
+    !activeSelected && !!themeValues.iosBulletFirstImage
+  );
   return (
     <div className="flex gap-2">
       <div
-        className="relative w-7 h-7 bg-gray-200 rounded-full"
+        className={clsx(
+          "relative w-7 h-7  ",
+          activeSelected && !!themeValues.iosBulletSelectedFirstImage
+            ? ""
+            : !activeSelected && !!themeValues.iosBulletFirstImage
+            ? ""
+            : "bg-gray-200 rounded-full"
+        )}
         style={{
           backgroundImage: `url(${
             activeSelected ? themeValues.iosBulletSelectedFirstImage : themeValues.iosBulletFirstImage
           })`,
-          backgroundSize: "contain",
+
+          backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
         }}
@@ -27,7 +40,14 @@ export function PassCodeBullets({ themeValues, activeSelected }: PassCodeBullets
         </div>
       </div>
       <div
-        className="relative w-7 h-7 bg-gray-200 rounded-full"
+        className={clsx(
+          "relative w-7 h-7  ",
+          activeSelected && !!themeValues.iosBulletSelectedSecondImage
+            ? ""
+            : !activeSelected && !!themeValues.iosBulletSecondImage
+            ? ""
+            : "bg-gray-200 rounded-full"
+        )}
         style={{
           backgroundImage: `url(${
             activeSelected ? themeValues.iosBulletSelectedSecondImage : themeValues.iosBulletSecondImage
@@ -37,7 +57,14 @@ export function PassCodeBullets({ themeValues, activeSelected }: PassCodeBullets
         }}
       ></div>
       <div
-        className="relative w-7 h-7 bg-gray-200 rounded-full"
+        className={clsx(
+          "relative w-7 h-7  ",
+          activeSelected && !!themeValues.iosBulletSelectedThirdImage
+            ? ""
+            : !activeSelected && !!themeValues.iosBulletThirdImage
+            ? ""
+            : "bg-gray-200 rounded-full"
+        )}
         style={{
           backgroundImage: `url(${
             activeSelected ? themeValues.iosBulletSelectedThirdImage : themeValues.iosBulletThirdImage
@@ -53,7 +80,14 @@ export function PassCodeBullets({ themeValues, activeSelected }: PassCodeBullets
         </div>
       </div>
       <div
-        className="relative w-7 h-7 bg-gray-200 rounded-full"
+        className={clsx(
+          "relative w-7 h-7  ",
+          activeSelected && !!themeValues.iosBulletSelectedFourthImage
+            ? ""
+            : !activeSelected && !!themeValues.iosBulletFourthImage
+            ? ""
+            : "bg-gray-200 rounded-full"
+        )}
         style={{
           backgroundImage: `url(${
             activeSelected ? themeValues.iosBulletSelectedFourthImage : themeValues.iosBulletFourthImage

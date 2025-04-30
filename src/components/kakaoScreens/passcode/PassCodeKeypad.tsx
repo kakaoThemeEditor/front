@@ -19,7 +19,14 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
         <div className="w-5 h-5 absolute -left-3 top-1/2 transform -translate-y-1/2">
           <CircleButton Number={5} />
         </div>
-        <div className="flex flex-col justify-center items-center font-bold text-xl">1</div>
+        <div
+          className="flex flex-col justify-center items-center font-bold text-xl"
+          style={{
+            color: themeValues.iosKeypadTextNormalColor,
+          }}
+        >
+          1
+        </div>
         <div
           className="relative flex flex-col justify-center items-center font-bold text-xl"
           style={{
@@ -33,8 +40,23 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
             </SpeechBubble>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center font-bold text-xl">3</div>
-        <div className="flex flex-col justify-center items-center font-bold text-xl">4</div>
+        <div
+          className="flex flex-col justify-center items-center font-bold text-xl"
+          style={{
+            color: themeValues.iosKeypadTextNormalColor,
+          }}
+        >
+          3
+        </div>
+        <div
+          className="flex flex-col justify-center items-center font-bold text-xl"
+          style={{
+            color: themeValues.iosKeypadTextNormalColor,
+          }}
+        >
+          4
+        </div>
+        {/* 이부분 CSS 수정 필요 */}
         <div
           className="relative flex flex-col justify-center items-center font-bold text-xl"
           style={{
@@ -44,6 +66,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
             backgroundRepeat: "no-repeat",
             width: "60px",
             height: "60px",
+            color: themeValues.iosKeypadTextNormalColor,
           }}
         >
           5
@@ -53,12 +76,52 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
             </SpeechBubble>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center font-bold text-xl">6</div>
-        <div className="flex flex-col justify-center items-center font-bold text-xl">7</div>
-        <div className="flex flex-col justify-center items-center font-bold text-xl">8</div>
-        <div className="flex flex-col justify-center items-center font-bold text-xl">9</div>
-        <div className="flex flex-col justify-center items-center font-bold text-xl"></div>
-        <div className="flex flex-col justify-center items-center font-bold text-xl">0</div>
+        <div
+          className="flex flex-col justify-center items-center font-bold text-xl"
+          style={{
+            color: themeValues.iosKeypadTextNormalColor,
+          }}
+        >
+          6
+        </div>
+        <div
+          className="flex flex-col justify-center items-center font-bold text-xl"
+          style={{
+            color: themeValues.iosKeypadTextNormalColor,
+          }}
+        >
+          7
+        </div>
+        <div
+          className="flex flex-col justify-center items-center font-bold text-xl"
+          style={{
+            color: themeValues.iosKeypadTextNormalColor,
+          }}
+        >
+          8
+        </div>
+        <div
+          className="flex flex-col justify-center items-center font-bold text-xl"
+          style={{
+            color: themeValues.iosKeypadTextNormalColor,
+          }}
+        >
+          9
+        </div>
+        <div
+          className="flex flex-col justify-center items-center font-bold text-xl"
+          style={{
+            color: themeValues.iosKeypadTextNormalColor,
+          }}
+        ></div>
+        <div
+          className="flex flex-col justify-center items-center font-bold text-xl"
+          style={{
+            color: themeValues.iosKeypadTextNormalColor,
+          }}
+        >
+          0
+        </div>
         <div className="flex flex-col justify-center items-center font-bold text-xl">
           <IoBackspaceOutline className="text-2xl" />
         </div>
