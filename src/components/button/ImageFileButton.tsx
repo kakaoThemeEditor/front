@@ -6,7 +6,10 @@ interface ImageFileButtonProps {
   className?: string;
 }
 
-export default function ImageFileButton({ className = "", onImageUpload }: ImageFileButtonProps) {
+export default function ImageFileButton({
+  className = "",
+  onImageUpload,
+}: ImageFileButtonProps) {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -28,11 +31,24 @@ export default function ImageFileButton({ className = "", onImageUpload }: Image
   };
 
   return (
-    <div className={`relative cursor-pointer p-2 ${className}`} onClick={handleClick}>
-      <input type="file" ref={fileInputRef} onChange={handleImageChange} accept="image/*" className="hidden" />
+    <div
+      className={`relative w-fit cursor-pointer p-1 m-1 rounded-sm hover:bg-gray-100 ${className}`}
+      onClick={handleClick}
+    >
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleImageChange}
+        accept="image/*"
+        className="hidden"
+      />
       {previewImage ? (
         <div className="w-12 h-12 rounded-none">
-          <img src={previewImage} alt="Uploaded" className="w-full h-full object-contain" />
+          <img
+            src={previewImage}
+            alt="Uploaded"
+            className="w-full h-full object-contain"
+          />
         </div>
       ) : (
         <div className="w-6 h-6  ">

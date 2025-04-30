@@ -12,59 +12,71 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useEditorStore } from "@/store/editorStore";
 
 export function ThemeStyleDropDown() {
-  const [theme1, setTheme1] = useState("theme1");
+  const { currentStyle, setCurrentStyle } = useEditorStore();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">
-          <span className="font-bold">PassCode</span>
+          <span className="font-bold">{currentStyle}</span>
           <ChevronDown className="-me-1 ms-2 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
-        <DropdownMenuCheckboxItem checked={theme1 === "TabBar"} onCheckedChange={() => setTheme1("TabBar")}>
+        <DropdownMenuCheckboxItem checked={currentStyle === "TabBar"} onCheckedChange={() => setCurrentStyle("TabBar")}>
           탭바
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={theme1 === "Mainview"} onCheckedChange={() => setTheme1("Mainview")}>
+        <DropdownMenuCheckboxItem
+          checked={currentStyle === "Mainview"}
+          onCheckedChange={() => setCurrentStyle("Mainview")}
+        >
           메인뷰
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={theme1 === "Feature"} onCheckedChange={() => setTheme1("Feature")}>
+        <DropdownMenuCheckboxItem
+          checked={currentStyle === "Feature"}
+          onCheckedChange={() => setCurrentStyle("Feature")}
+        >
           기능
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
-          checked={theme1 === "DefaultProfile"}
-          onCheckedChange={() => setTheme1("DefaultProfile")}
+          checked={currentStyle === "DefaultProfile"}
+          onCheckedChange={() => setCurrentStyle("DefaultProfile")}
         >
           기본프로필
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={theme1 === "Chat"} onCheckedChange={() => setTheme1("Chat")}>
+        <DropdownMenuCheckboxItem checked={currentStyle === "Chat"} onCheckedChange={() => setCurrentStyle("Chat")}>
           채팅
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={theme1 === "Message"} onCheckedChange={() => setTheme1("Message")}>
+        <DropdownMenuCheckboxItem
+          checked={currentStyle === "Message"}
+          onCheckedChange={() => setCurrentStyle("Message")}
+        >
           메시지
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={theme1 === "Passcode"} onCheckedChange={() => setTheme1("Passcode")}>
+        <DropdownMenuCheckboxItem
+          checked={currentStyle === "Passcode"}
+          onCheckedChange={() => setCurrentStyle("Passcode")}
+        >
           패스코드
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
-          checked={theme1 === "MessageNotificationBar"}
-          onCheckedChange={() => setTheme1("MessageNotificationBar")}
+          checked={currentStyle === "MessageNotificationBar"}
+          onCheckedChange={() => setCurrentStyle("MessageNotificationBar")}
         >
           메시지알림바
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
-          checked={theme1 === "DirectShareBar"}
-          onCheckedChange={() => setTheme1("DirectShareBar")}
+          checked={currentStyle === "DirectShareBar"}
+          onCheckedChange={() => setCurrentStyle("DirectShareBar")}
         >
           직접공유바
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
-          checked={theme1 === "BottomBannerStyle"}
-          onCheckedChange={() => setTheme1("BottomBannerStyle")}
+          checked={currentStyle === "BottomBannerStyle"}
+          onCheckedChange={() => setCurrentStyle("BottomBannerStyle")}
         >
           바텀배너스타일
         </DropdownMenuCheckboxItem>

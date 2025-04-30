@@ -73,7 +73,7 @@ export function PassCodeEditTable({
               <div className="px-2 py-1">배경 컬러</div>
             </div>
             <div className="grid grid-cols-3 items-center">
-              <div className="px-2 py-1">-ios-background-image</div>
+              <div className="px-2 py-1 ">-ios-background-image</div>
               <ImageFileButton onImageUpload={(file) => handleChange("iosBackgroundImage", file)} />
               <div className="px-2 py-1">배경 이미지</div>
             </div>
@@ -158,22 +158,34 @@ export function PassCodeEditTable({
         <div className="flex-1">
           <div className="grid grid-cols-3 items-center">
             <div className="px-2 py-1">-ios-bullet-selected-first-image</div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosBulletSelectedFirstImage", file)} />
+            <ImageFileButton
+              className="hover:bg-white"
+              onImageUpload={(file) => handleChange("iosBulletSelectedFirstImage", file)}
+            />
             <div className="px-2 py-1">잠금화면 불릿 이미지 - 입력</div>
           </div>
           <div className="grid grid-cols-3 items-center">
             <div className="px-2 py-1">-ios-bullet-selected-second-image</div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosBulletSelectedSecondImage", file)} />
+            <ImageFileButton
+              className="hover:bg-white"
+              onImageUpload={(file) => handleChange("iosBulletSelectedSecondImage", file)}
+            />
             <div className="px-2 py-1">잠금화면 불릿 이미지 - 입력</div>
           </div>
           <div className="grid grid-cols-3 items-center">
             <div className="px-2 py-1">-ios-bullet-selected-third-image</div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosBulletSelectedThirdImage", file)} />
+            <ImageFileButton
+              className="hover:bg-white"
+              onImageUpload={(file) => handleChange("iosBulletSelectedThirdImage", file)}
+            />
             <div className="px-2 py-1">잠금화면 불릿 이미지 - 입력</div>
           </div>
           <div className="grid grid-cols-3 items-center">
             <div className="px-2 py-1">-ios-bullet-selected-fourth-image</div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosBulletSelectedFourthImage", file)} />
+            <ImageFileButton
+              className="hover:bg-white"
+              onImageUpload={(file) => handleChange("iosBulletSelectedFourthImage", file)}
+            />
             <div className="px-2 py-1">잠금화면 불릿 이미지 - 입력</div>
           </div>
         </div>
