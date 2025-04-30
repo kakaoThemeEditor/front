@@ -4,7 +4,7 @@ import PassCode from "@/components/kakaoScreens/PassCode";
 import TabBar from "@/components/kakaoScreens/TabBar";
 import MainviewStyle1 from "@/components/kakaoScreens/MainviewStyle1";
 export const KakaoEditor = () => {
-  const [screen, setScreen] = useState<string>("mainview1");
+  const [screen, setScreen] = useState<string>("passcode");
 
   function renderMatches(screen: string) {
     switch (screen) {

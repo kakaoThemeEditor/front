@@ -9,11 +9,11 @@
 2. 인증 관련 API
    | 엔드포인트 | 메소드 | 설명 |
    |-----------|--------|------|
-   | /api/auth/register | POST | 회원가입 |
-   | /api/auth/login | POST | 로그인 (토큰 발급) |
-   | /api/auth/logout | POST | 로그아웃 (토큰 무효화) |
-   | /api/auth/refresh-token | POST | 액세스 토큰 재발급 |
-   | /api/auth/forgot-password | POST | 비밀번호 재설정 링크 요청 |
-   | /api/auth/reset-password | POST | 새 비밀번호 설정 |
-   | /api/auth/verify-email | POST | 이메일 인증 완료 |
-   | /api/auth/send-verification-email | POST | 이메일 인증 메일 재발송 |
+   | /auth/register | POST | 회원가입 |
+   | /auth/login | POST | 로그인 (토큰 발급) |
+   | /auth/logout | POST | 로그아웃 (토큰 무효화) |
+   | /auth/refresh-token | POST | 액세스 토큰 재발급 |
+   | /auth/forgot-password | POST | 비밀번호 재설정 링크 요청 |
+   | /auth/reset-password | POST | 새 비밀번호 설정 |
+   | /auth/verify-email | POST | 이메일 인증 완료 |
+   | /auth/send-verification-email | POST | 이메일 인증 메일 재발송 |

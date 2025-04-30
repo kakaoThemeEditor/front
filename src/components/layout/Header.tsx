@@ -1,6 +1,8 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useLocation } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
+import { Button } from "../ui/button";
+import { ThemeDropDown } from "../dropdown-menu/ThemeDropDown";
 
 const getPageTitle = (path: string) => {
   const pathSegments = path.split("/").filter(Boolean);
@@ -18,7 +20,7 @@ const getPageTitle = (path: string) => {
       case "template":
         return "나의 카카오톡 테마";
       case "editor":
-        return "카카오톡 테마 편집";
+        return "편집기";
       default:
         return "";
     }
@@ -75,13 +77,13 @@ export const Header = () => {
   const { parentTitle, currentTitle } = getPageTitle(location.pathname);
 
   return (
-    <div className="flex justify-between items-center px-4 py-2 border-b border-gray-300">
-      <div className="flex">
+    <div className="flex justify-between items-center px-4 py-2 border-b border-gray-300 h-9">
+      <div className="flex w-full overflow-x-auto whitespace-nowrap">
         <div className="flex md:hidden">
           <SidebarTrigger />
-          <span className="px-2">|</span>
+          <span className="pl-1 pr-2">|</span>
         </div>
-        <div className="flex items-center text-lg font-semibold">
+        <div className="flex items-center text-sm font-semibold ">
           {parentTitle && (
             <>
               <span>{parentTitle}</span>
@@ -89,6 +91,12 @@ export const Header = () => {
             </>
           )}
           <span>{currentTitle}</span>
+          {currentTitle === "카카오톡 테마 편집" && (
+            <>
+              <ChevronRight className="w-4 h-4 mx-1" />
+              <ThemeDropDown />
+            </>
+          )}
         </div>
       </div>
     </div>

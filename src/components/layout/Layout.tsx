@@ -4,9 +4,10 @@ import { Header } from "./Header";
 
 export const Layout = () => {
   return (
-    <div className="flex min-h-screen w-screen">
+    //  높이 h-screen으로 고정
+    <div className="flex min-h-screen xl:h-screen w-screen">
       <AppSidebar />
-      <main className="flex-1 overflow-auto w-full">
+      <main className="flex-1 h-full w-full ">
         <Header />
         <Outlet />
       </main>

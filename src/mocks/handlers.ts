@@ -12,7 +12,10 @@ const MOCK_COOKIE_KEYS = {
 export const handlers = [
   // 로그인
   http.post("/auth/login", async ({ request }) => {
-    const { email, password } = (await request.json()) as { email: string; password: string };
+    const { email, password } = (await request.json()) as {
+      email: string;
+      password: string;
+    };
 
     if (email === "test@example.com" && password === "1") {
       return HttpResponse.json({
@@ -31,7 +34,10 @@ export const handlers = [
 
   // 회원가입
   http.post("/auth/register", async ({ request }) => {
-    const { email, password } = (await request.json()) as { email: string; password: string };
+    const { email, password } = (await request.json()) as {
+      email: string;
+      password: string;
+    };
 
     return HttpResponse.json(
       {
@@ -64,7 +70,11 @@ export const handlers = [
 
   // 이메일 인증
   http.post("/auth/verify-email", async ({ request }) => {
-    const { email, code } = (await request.json()) as { email: string; code: string };
+    const { email, code } = (await request.json()) as {
+      email: string;
+
+      code: string;
+    };
 
     if (code === "123456") {
       return HttpResponse.json({ message: "Email verified successfully" });

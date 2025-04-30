@@ -5,6 +5,7 @@ import CircleButton from "../button/CircleButton";
 import { PassCodeEditTable } from "../table/PassCodeEditTable";
 import { Button } from "../ui/button";
 import clsx from "clsx";
+import { ThemeStyleDropDown } from "../dropdown-menu/ThemeStyleDropDown";
 
 // 편집 가능한 영역의 타입 정의
 interface ThemeValues {
@@ -43,14 +44,13 @@ export default function PassCode() {
   });
 
   const [activeSelected, setActiveSelected] = useState<boolean>(false);
-
-  const KeyPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", "delete"];
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] w-full h-full">
+    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] w-full h-full xl:h-[calc(100vh-36px)]">
       {/* 왼쪽 */}
-      <div className="flex justify-center items-center">
+      {/* h-[calc(100vh-36px)] xl:h-full 같은 의미이긴함 */}
+      <div className="relative flex justify-center items-center min-h-[calc(100vh-36px)] ">
         <div
-          className="h-[700px] w-[360px] bg-white rounded-2xl p-[2px]"
+          className="w-72 xl:w-80 aspect-[9/18.7] bg-white rounded-2xl p-[2px] "
           style={{
             boxShadow: `
             4px 4px 12px rgba(0,0,0,0.15), 
@@ -205,9 +205,9 @@ export default function PassCode() {
       </div>
       {/* 왼쪽 끝 */}
       {/* 오른쪽 */}
-      <div className="w-full h-full p-6 bg-white rounded-lg shadow-lg">
-        <div className="flex justify-between">
-          <h1 className="font-bold text-2xl mb-4">PassCode 편집</h1>
+      <div className="w-full p-6 bg-white border-l-2 border-l-gray-100 overflow-auto">
+        <div className="flex justify-between mb-4">
+          <ThemeStyleDropDown />
           <Button>저장하기</Button>
         </div>
         <PassCodeEditTable
