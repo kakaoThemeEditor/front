@@ -1,7 +1,7 @@
 import { Search, Settings, UserPlus, Music } from "lucide-react";
 import clsx from "clsx";
 
-export function TabBarHeader({ className }: { className?: string }) {
+export function MV3PreviewHeader({ className }: { className?: string }) {
   return (
     <div className={clsx("w-full flex items-center justify-between mt-2 px-3 pt-1", className)}>
       <div className="text-xs xl:text-sm font-bold">친구</div>

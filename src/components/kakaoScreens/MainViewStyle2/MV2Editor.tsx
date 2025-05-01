@@ -1,25 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { ThemeStyleDropDown } from "@/components/dropdown-menu/ThemeStyleDropDown";
-import { TabBarEditTable } from "@/components/table/TabBarEditTable";
-import { ThemeValues } from "./TabBar";
+import { ThemeValues } from "./MainviewStyle2";
+import { MV2EditorTable } from "@/components/table/MV2EditorTable";
 
-interface TabBarEditorProps {
+interface MV2EditorProps {
   themeValues: ThemeValues;
   setThemeValues: React.Dispatch<React.SetStateAction<ThemeValues>>;
   isActive: { [key: string]: boolean };
   setIsActive: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>;
 }
 
-export function TabBarEditor({ themeValues, setThemeValues, isActive, setIsActive }: TabBarEditorProps) {
+export function MV2Editor({ themeValues, setThemeValues, isActive, setIsActive }: MV2EditorProps) {
   return (
     <div className="w-full xl:w-11/12 mx-auto p-6  overflow-auto">
-      <div className="flex justify-between mb-4 w-full">
+      <div className="flex justify-between mb-4">
         <ThemeStyleDropDown />
-        <Button size="sm" className="text-xs">
-          저장하기
-        </Button>
+        <Button>저장하기</Button>
       </div>
-      <TabBarEditTable
+      <MV2EditorTable
         themeValues={themeValues}
         setThemeValues={setThemeValues}
         isActive={isActive}

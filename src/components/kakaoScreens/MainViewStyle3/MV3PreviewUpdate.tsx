@@ -1,7 +1,7 @@
 import { IoChevronForward } from "react-icons/io5";
 import clsx from "clsx";
 
-export function TabBarUpdate({ className }: { className?: string }) {
+export function MV3PreviewUpdate({ className }: { className?: string }) {
   return (
     <div className={clsx("px-3 py-0.5", className)}>
       <div className="flex justify-between items-center w-full rounded-2xl bg-black/10 px-1.5 py-1.5 xl:px-2">

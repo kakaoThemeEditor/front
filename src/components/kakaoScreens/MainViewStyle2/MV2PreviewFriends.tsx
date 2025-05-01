@@ -2,7 +2,7 @@ import { PlusIcon, GiftIcon } from "lucide-react";
 import { IoChevronUp } from "react-icons/io5";
 import ProfileImg01 from "../../../assets/Images/profileImg01@3x.png";
 import clsx from "clsx";
-export function TabBarFriends({ className }: { className?: string }) {
+export function MV2PreviewFriends({ className }: { className?: string }) {
   return (
     <>
       {/* 펑 */}

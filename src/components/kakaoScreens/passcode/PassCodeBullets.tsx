@@ -34,9 +34,7 @@ export function PassCodeBullets({ themeValues, activeSelected }: PassCodeBullets
         }}
       >
         <div className="absolute top-0 -left-9 w-8 h-4">
-          <SpeechBubble direction="right">
-            <span className="text-sm">4</span>
-          </SpeechBubble>
+          <SpeechBubble direction="right">4</SpeechBubble>
         </div>
       </div>
       <div
@@ -74,9 +72,7 @@ export function PassCodeBullets({ themeValues, activeSelected }: PassCodeBullets
         }}
       >
         <div className="absolute top-8 left-0 w-8 h-4">
-          <SpeechBubble direction="top">
-            <span className="text-sm">3</span>
-          </SpeechBubble>
+          <SpeechBubble direction="top">3</SpeechBubble>
         </div>
       </div>
       <div

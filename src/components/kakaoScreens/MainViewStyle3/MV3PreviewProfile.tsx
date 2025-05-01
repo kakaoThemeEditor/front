@@ -3,7 +3,7 @@ import ProfileImg01 from "../../../assets/Images/profileImg01@3x.png";
 import UpdatedImg02 from "../../../assets/UpdatedProfile02.png";
 import { IoChevronUp } from "react-icons/io5";
 import clsx from "clsx";
-export function TabBarProfile({ className }: { className?: string }) {
+export function MV3PreviewProfile({ className }: { className?: string }) {
   return (
     <>
       {/* 본인 프로필 */}

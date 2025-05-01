@@ -17,10 +17,12 @@ export function PassCodeEditor({
   setActiveSelected,
 }: PassCodeEditorProps) {
   return (
-    <div className="w-full p-6 bg-white border-l-2 border-l-gray-100 overflow-auto">
-      <div className="flex justify-between mb-4">
+    <div className="w-full xl:w-11/12  p-6 bg-white  overflow-auto mx-auto">
+      <div className="flex justify-between mb-4 w-full ">
         <ThemeStyleDropDown />
-        <Button>저장하기</Button>
+        <Button size="sm" className="text-xs">
+          저장하기
+        </Button>
       </div>
       <PassCodeEditTable
         themeValues={themeValues}

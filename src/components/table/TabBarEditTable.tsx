@@ -44,24 +44,23 @@ export function TabBarEditTable({
   };
 
   return (
-    <div className="w-full text-xs text-left">
-      <div className="bg-gray-100 border-t border-t-gray-200 border-b border-b-gray-900 py-1.5 grid grid-cols-3">
+    <div className="w-full text-[10px] xl:text-xs text-left">
+      <div className="bg-gray-100 border-t border-t-gray-200 border-b border-b-gray-900 py-1.5 grid grid-cols-2 items-center">
         <div className="px-2 py-1 text-xs font-bold">TabBarStyle-Main</div>
         <div className="px-2 py-1 text-xs font-bold">메인탭 스타일</div>
       </div>
 
       <div className="flex items-center mb-6">
-        <div className="flex items-center justify-center w-4 h-4">
+        <div className="px-1">
           <CircleButton Number={1} className="text-xs" />
         </div>
         <div className="flex-1">
-          <div className="grid grid-cols-3 items-center">
-            <div className="px-2 py-1">-ios-background-image</div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosBackgroundImage", file)} />
+          <div className="grid grid-cols-2 items-center">
             <div className="px-2 py-1">메인탭 배경 이미지</div>
+            <ImageFileButton onImageUpload={(file) => handleChange("iosBackgroundImage", file)} />
           </div>
-          <div className="grid grid-cols-3 items-center">
-            <div className="px-2 py-1">background-color</div>
+          <div className="grid grid-cols-2 items-center">
+            <div className="px-2 py-1">메인탭 배경 컬러</div>
             <div className="flex items-center gap-2">
               <Input
                 type="text"
@@ -77,130 +76,86 @@ export function TabBarEditTable({
                 onChange={(e) => handleChange("backgroundColor", e.target.value)}
               />
             </div>
-            <div className="px-2 py-1">메인탭 배경 컬러</div>
           </div>
         </div>
       </div>
 
       <div className="flex items-center mb-6">
-        <div className="flex items-center justify-center w-4 h-4">
+        <div className="px-1">
           <CircleButton Number={2} className="text-xs" />
         </div>
-        <div className="flex-1 ">
-          {/* 친구탭 기본 */}
-          <div className={clsx("grid grid-cols-3 items-center", isActive.iosFriendsNormalIconImage && "bg-blue-50")}>
-            <div className="px-2 py-1 cursor-pointer" onClick={() => handleActive("iosFriendsNormalIconImage", true)}>
-              -ios-friends-normal-icon-image
-            </div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosFriendsNormalIconImage", file)} />
+        <div className="flex-1">
+          <div className={clsx("grid grid-cols-2 items-center", isActive.iosFriendsNormalIconImage && "bg-blue-50")}>
             <div className="px-2 py-1">친구탭 아이콘</div>
+            <ImageFileButton onImageUpload={(file) => handleChange("iosFriendsNormalIconImage", file)} />
           </div>
-          {/* 친구탭 선택 */}
-          <div className={clsx("grid grid-cols-3 items-center", !isActive.iosFriendsNormalIconImage && "bg-blue-50")}>
-            <div className="px-2 py-1 cursor-pointer" onClick={() => handleActive("iosFriendsNormalIconImage", false)}>
-              -ios-friends-selected-icon-image
-            </div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosFriendsSelectedIconImage", file)} />
+          <div className={clsx("grid grid-cols-2 items-center", !isActive.iosFriendsNormalIconImage && "bg-blue-50")}>
             <div className="px-2 py-1">친구탭 선택 시 아이콘</div>
+            <ImageFileButton onImageUpload={(file) => handleChange("iosFriendsSelectedIconImage", file)} />
           </div>
         </div>
       </div>
 
       <div className="flex items-center mb-6">
-        <div className="flex items-center justify-center w-4 h-4">
+        <div className="px-1">
           <CircleButton Number={3} className="text-xs" />
         </div>
         <div className="flex-1">
-          {/* 채팅탭 기본 */}
-          <div className={clsx("grid grid-cols-3 items-center", isActive.iosChatsNormalIconImage && "bg-blue-50")}>
-            <div className="px-2 py-1 cursor-pointer" onClick={() => handleActive("iosChatsNormalIconImage", true)}>
-              -ios-chats-normal-icon-image
-            </div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosChatsNormalIconImage", file)} />
+          <div className={clsx("grid grid-cols-2 items-center", isActive.iosChatsNormalIconImage && "bg-blue-50")}>
             <div className="px-2 py-1">채팅탭 아이콘</div>
+            <ImageFileButton onImageUpload={(file) => handleChange("iosChatsNormalIconImage", file)} />
           </div>
-          {/* 채팅탭 선택 */}
-          <div className={clsx("grid grid-cols-3 items-center", !isActive.iosChatsNormalIconImage && "bg-blue-50")}>
-            <div className="px-2 py-1 cursor-pointer" onClick={() => handleActive("iosChatsNormalIconImage", false)}>
-              -ios-chats-selected-icon-image
-            </div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosChatsSelectedIconImage", file)} />
+          <div className={clsx("grid grid-cols-2 items-center", !isActive.iosChatsNormalIconImage && "bg-blue-50")}>
             <div className="px-2 py-1">채팅탭 선택 시 아이콘</div>
+            <ImageFileButton onImageUpload={(file) => handleChange("iosChatsSelectedIconImage", file)} />
           </div>
         </div>
       </div>
 
       <div className="flex items-center mb-6">
-        <div className="flex items-center justify-center w-4 h-4">
+        <div className="px-1">
           <CircleButton Number={4} className="text-xs" />
         </div>
         <div className="flex-1">
-          {/* 오픈채팅탭 기본 */}
-          <div className={clsx("grid grid-cols-3 items-center", isActive.iosOpenchatsNormalIconImage && "bg-blue-50")}>
-            <div className="px-2 py-1 cursor-pointer" onClick={() => handleActive("iosOpenchatsNormalIconImage", true)}>
-              -ios-openchats-normal-icon-image
-            </div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosOpenchatsNormalIconImage", file)} />
+          <div className={clsx("grid grid-cols-2 items-center", isActive.iosOpenchatsNormalIconImage && "bg-blue-50")}>
             <div className="px-2 py-1">오픈채팅탭 아이콘</div>
+            <ImageFileButton onImageUpload={(file) => handleChange("iosOpenchatsNormalIconImage", file)} />
           </div>
-          {/* 오픈채팅탭 선택 */}
-          <div className={clsx("grid grid-cols-3 items-center", !isActive.iosOpenchatsNormalIconImage && "bg-blue-50")}>
-            <div
-              className="px-2 py-1 cursor-pointer"
-              onClick={() => handleActive("iosOpenchatsNormalIconImage", false)}
-            >
-              -ios-openchats-selected-icon-image
-            </div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosOpenchatsSelectedIconImage", file)} />
+          <div className={clsx("grid grid-cols-2 items-center", !isActive.iosOpenchatsNormalIconImage && "bg-blue-50")}>
             <div className="px-2 py-1">오픈채팅탭 선택 시 아이콘</div>
+            <ImageFileButton onImageUpload={(file) => handleChange("iosOpenchatsSelectedIconImage", file)} />
           </div>
         </div>
       </div>
 
       <div className="flex items-center mb-6">
-        <div className="flex items-center justify-center w-4 h-4">
+        <div className="px-1">
           <CircleButton Number={5} className="text-xs" />
         </div>
         <div className="flex-1">
-          {/* 쇼핑탭 기본 */}
-          <div className={clsx("grid grid-cols-3 items-center", isActive.iosShoppingNormalIconImage && "bg-blue-50")}>
-            <div className="px-2 py-1 cursor-pointer" onClick={() => handleActive("iosShoppingNormalIconImage", true)}>
-              -ios-shopping-normal-icon-image
-            </div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosShoppingNormalIconImage", file)} />
+          <div className={clsx("grid grid-cols-2 items-center", isActive.iosShoppingNormalIconImage && "bg-blue-50")}>
             <div className="px-2 py-1">쇼핑탭 아이콘</div>
+            <ImageFileButton onImageUpload={(file) => handleChange("iosShoppingNormalIconImage", file)} />
           </div>
-          {/* 쇼핑탭 선택 */}
-          <div className={clsx("grid grid-cols-3 items-center", !isActive.iosShoppingNormalIconImage && "bg-blue-50")}>
-            <div className="px-2 py-1 cursor-pointer" onClick={() => handleActive("iosShoppingNormalIconImage", false)}>
-              -ios-shopping-selected-icon-image
-            </div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosShoppingSelectedIconImage", file)} />
+          <div className={clsx("grid grid-cols-2 items-center", !isActive.iosShoppingNormalIconImage && "bg-blue-50")}>
             <div className="px-2 py-1">쇼핑탭 선택 시 아이콘</div>
+            <ImageFileButton onImageUpload={(file) => handleChange("iosShoppingSelectedIconImage", file)} />
           </div>
         </div>
       </div>
 
       <div className="flex items-center mb-6">
-        <div className="flex items-center justify-center w-4 h-4">
+        <div className="px-1">
           <CircleButton Number={6} className="text-xs" />
         </div>
         <div className="flex-1">
-          {/* 더보기탭 기본 */}
-          <div className={clsx("grid grid-cols-3 items-center", isActive.iosMoreNormalIconImage && "bg-blue-50")}>
-            <div className="px-2 py-1 cursor-pointer" onClick={() => handleActive("iosMoreNormalIconImage", true)}>
-              -ios-more-normal-icon-image
-            </div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosMoreNormalIconImage", file)} />
+          <div className={clsx("grid grid-cols-2 items-center", isActive.iosMoreNormalIconImage && "bg-blue-50")}>
             <div className="px-2 py-1">더보기탭 아이콘</div>
+            <ImageFileButton onImageUpload={(file) => handleChange("iosMoreNormalIconImage", file)} />
           </div>
-          {/* 더보기탭 선택 */}
-          <div className={clsx("grid grid-cols-3 items-center", !isActive.iosMoreNormalIconImage && "bg-blue-50")}>
-            <div className="px-2 py-1 cursor-pointer" onClick={() => handleActive("iosMoreNormalIconImage", false)}>
-              -ios-more-selected-icon-image
-            </div>
-            <ImageFileButton onImageUpload={(file) => handleChange("iosMoreSelectedIconImage", file)} />
+          <div className={clsx("grid grid-cols-2 items-center", !isActive.iosMoreNormalIconImage && "bg-blue-50")}>
             <div className="px-2 py-1">더보기탭 선택 시 아이콘</div>
+            <ImageFileButton onImageUpload={(file) => handleChange("iosMoreSelectedIconImage", file)} />
           </div>
         </div>
       </div>

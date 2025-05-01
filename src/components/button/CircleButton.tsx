@@ -9,7 +9,8 @@ export default function CircleButton({ Number, className = "" }: CircleButtonPro
   return (
     <div
       className={clsx(
-        "w-full h-full bg-kakao-blue rounded-full flex justify-center items-center text-white text-sm font-bold border",
+        "w-4 h-4 bg-kakao-blue rounded-full flex justify-center items-center text-white text-sm font-bold border",
+        "text-[9px] xl:text-[11px]",
         className
       )}
     >

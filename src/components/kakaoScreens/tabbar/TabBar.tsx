@@ -6,6 +6,7 @@ import { TabBarFriends } from "./TabBarFriends";
 import { TabBarBottom } from "./TabBarBottom";
 import { TabBarEditor } from "./TabBarEditor";
 import MaintabBgImage from "../../../assets/Images/maintabBgImage@2x.png";
+import { useWindowHeight } from "@/hooks/use-window-height";
 
 export interface ThemeValues {
   backgroundColor: string;
@@ -23,6 +24,8 @@ export interface ThemeValues {
 }
 
 export default function TabBar() {
+  const { shouldAddPadding, paddingValue } = useWindowHeight();
+
   const [themeValues, setThemeValues] = useState<ThemeValues>({
     backgroundColor: "#FFFFFF",
     iosBackgroundImage: "",
@@ -49,9 +52,15 @@ export default function TabBar() {
   return (
     <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] w-full h-full xl:h-[calc(100vh-36px)] text-sm">
       {/* 왼쪽 */}
-      <div className="relative flex justify-center items-center min-h-[calc(100vh-36px)]">
+      <div
+        className="relative flex justify-center items-center min-h-[calc(100vh-36px)] overflow-auto bg-white border-r-2 border-r-gray-100"
+        style={{
+          paddingTop: shouldAddPadding ? `${paddingValue * 1.5}px` : "0",
+          paddingBottom: shouldAddPadding ? `${paddingValue * 0.5}px` : "0",
+        }}
+      >
         <div
-          className="w-72 xl:w-80 aspect-[9/18.7] bg-white rounded-2xl p-[2px]"
+          className="w-64 xl:w-72 aspect-[9/18.7] bg-white rounded-2xl p-[2px]"
           style={{
             boxShadow: `
             4px 4px 12px rgba(0,0,0,0.15), 
@@ -59,7 +68,7 @@ export default function TabBar() {
           `,
           }}
         >
-          <div className="relative flex flex-col size-full rounded-2xl border-2 border-white bg-red-100">
+          <div className="relative flex flex-col size-full rounded-2xl border-2 border-white bg-red-100 ">
             <TabBarHeader />
             <TabBarUpdate />
             <TabBarProfile />

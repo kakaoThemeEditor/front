@@ -4,6 +4,7 @@ import SpeechBubble from "../../button/SpeechBubble";
 import { PassCodeBullets } from "./PassCodeBullets";
 import { PassCodeKeypad } from "./PassCodeKeypad";
 import clsx from "clsx";
+import { useWindowHeight } from "../../../hooks/use-window-height";
 
 interface PassCodePreviewProps {
   themeValues: ThemeValues;
@@ -14,10 +15,17 @@ export function PassCodePreview({
   themeValues,
   activeSelected,
 }: PassCodePreviewProps) {
+  const { shouldAddPadding, paddingValue } = useWindowHeight();
   return (
-    <div className="relative flex justify-center items-center min-h-[calc(100vh-36px)]">
+    <div
+      className="relative flex justify-center items-center min-h-[calc(100vh-36px)] overflow-auto border-r-2 border-r-gray-100"
+      style={{
+        paddingTop: shouldAddPadding ? `${paddingValue * 1.5}px` : "0",
+        paddingBottom: shouldAddPadding ? `${paddingValue * 0.5}px` : "0",
+      }}
+    >
       <div
-        className="w-72 xl:w-80 aspect-[9/18.7] bg-white rounded-2xl p-[2px]"
+        className="w-64 xl:w-72 aspect-[9/18.7] bg-white rounded-2xl p-[2px]"
         style={{
           boxShadow: `
             4px 4px 12px rgba(0,0,0,0.15), 
@@ -43,13 +51,11 @@ export function PassCodePreview({
           >
             <div className="relative">
               <div className="absolute top-9.5 -left-9 w-8 h-4">
-                <SpeechBubble direction="right">
-                  <span className="text-sm">2</span>
-                </SpeechBubble>
+                <SpeechBubble direction="right">2</SpeechBubble>
               </div>
               <div
                 className={clsx(
-                  "text-2xl font-bold mt-8 mb-4",
+                  "text-base xl:text-lg font-bold mt-8 mb-2",
                   themeValues.iosTextColor || "text-black"
                 )}
                 style={{ color: themeValues.iosTextColor }}
@@ -57,7 +63,7 @@ export function PassCodePreview({
                 비밀번호
               </div>
             </div>
-            <div className="text-sm text-gray-600 mb-4">
+            <div className="text-[11px] xl:text-xs text-gray-600 mb-4">
               카카오톡 암호를 입력해주세요.
             </div>
             <PassCodeBullets

@@ -19,19 +19,19 @@ export default function MainviewStyle1EditTable({
     }));
   };
   return (
-    <div className="w-full text-xs text-left">
-      <div className="bg-gray-100 border-t border-t-gray-200 border-b border-b-gray-900 py-1.5 grid grid-cols-3">
+    <div className="w-full text-[10px] xl:text-xs text-left">
+      <div className="bg-gray-100 border-t border-t-gray-200 border-b border-b-gray-900 py-1.5 grid grid-cols-2 items-center">
         <div className="px-2 py-1 text-xs font-bold">TabBarStyle-Main</div>
         <div className="px-2 py-1 text-xs font-bold">메인탭 스타일</div>
       </div>
 
       <div className="flex items-center mb-6">
-        <div className="flex items-center justify-center w-4 h-4">
+        <div className="px-1">
           <CircleButton Number={1} className="text-xs" />
         </div>
         <div className="flex-1">
-          <div className="grid grid-cols-3">
-            <div className="px-2 py-1">background-color</div>
+          <div className="grid grid-cols-2 items-center">
+            <div className="px-2 py-1">메인탭 배경 컬러</div>
             <div className="flex items-center gap-2">
               <Input
                 type="text"
@@ -47,7 +47,6 @@ export default function MainviewStyle1EditTable({
                 onChange={(e) => handleChange("iosTextColor", e.target.value)}
               />
             </div>
-            <div className="px-2 py-1">메인탭 배경 컬러</div>
           </div>
         </div>
       </div>

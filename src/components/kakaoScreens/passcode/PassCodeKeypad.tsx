@@ -20,7 +20,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
           <CircleButton Number={5} />
         </div>
         <div
-          className="flex flex-col justify-center items-center font-bold text-xl"
+          className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
             color: themeValues.iosKeypadTextNormalColor,
           }}
@@ -28,20 +28,18 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
           1
         </div>
         <div
-          className="relative flex flex-col justify-center items-center font-bold text-xl"
+          className="relative flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
             color: themeValues.iosKeypadTextNormalColor,
           }}
         >
           2
           <div className="absolute top-1/2 transform -translate-y-1/2 -left-10 w-8 h-4">
-            <SpeechBubble direction="right">
-              <span className="text-sm">6</span>
-            </SpeechBubble>
+            <SpeechBubble direction="right">6</SpeechBubble>
           </div>
         </div>
         <div
-          className="flex flex-col justify-center items-center font-bold text-xl"
+          className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
             color: themeValues.iosKeypadTextNormalColor,
           }}
@@ -49,7 +47,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
           3
         </div>
         <div
-          className="flex flex-col justify-center items-center font-bold text-xl"
+          className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
             color: themeValues.iosKeypadTextNormalColor,
           }}
@@ -58,7 +56,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
         </div>
         {/* 이부분 CSS 수정 필요 */}
         <div
-          className="relative flex flex-col justify-center items-center font-bold text-xl"
+          className="relative flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
             backgroundImage: `url(${themeValues.iosKeypadNumberHighlightedImage})`,
             backgroundSize: "contain",
@@ -71,13 +69,11 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
         >
           5
           <div className="absolute top-1/2 transform -translate-y-1/2 -left-6 w-8 h-4">
-            <SpeechBubble direction="right">
-              <span className="text-sm">7</span>
-            </SpeechBubble>
+            <SpeechBubble direction="right">7</SpeechBubble>
           </div>
         </div>
         <div
-          className="flex flex-col justify-center items-center font-bold text-xl"
+          className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
             color: themeValues.iosKeypadTextNormalColor,
           }}
@@ -85,7 +81,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
           6
         </div>
         <div
-          className="flex flex-col justify-center items-center font-bold text-xl"
+          className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
             color: themeValues.iosKeypadTextNormalColor,
           }}
@@ -93,7 +89,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
           7
         </div>
         <div
-          className="flex flex-col justify-center items-center font-bold text-xl"
+          className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
             color: themeValues.iosKeypadTextNormalColor,
           }}
@@ -101,7 +97,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
           8
         </div>
         <div
-          className="flex flex-col justify-center items-center font-bold text-xl"
+          className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
             color: themeValues.iosKeypadTextNormalColor,
           }}
@@ -109,21 +105,21 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
           9
         </div>
         <div
-          className="flex flex-col justify-center items-center font-bold text-xl"
+          className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
             color: themeValues.iosKeypadTextNormalColor,
           }}
         ></div>
         <div
-          className="flex flex-col justify-center items-center font-bold text-xl"
+          className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
             color: themeValues.iosKeypadTextNormalColor,
           }}
         >
           0
         </div>
-        <div className="flex flex-col justify-center items-center font-bold text-xl">
-          <IoBackspaceOutline className="text-2xl" />
+        <div className="flex flex-col justify-center items-center font-bold text-base xl:text-lg">
+          <IoBackspaceOutline className="text-lg xl:text-xl" />
         </div>
       </div>
     </div>

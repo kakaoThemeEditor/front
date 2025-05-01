@@ -40,7 +40,7 @@ export default function PassCode() {
   const [activeSelected, setActiveSelected] = useState<boolean>(false);
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] w-full h-full xl:h-[calc(100vh-36px)]">
+    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] w-full h-full xl:h-[calc(100vh-36px)] ">
       <PassCodePreview themeValues={themeValues} activeSelected={activeSelected} />
       <PassCodeEditor
         themeValues={themeValues}

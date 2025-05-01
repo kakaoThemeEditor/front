@@ -17,7 +17,7 @@ export function TabBarBottom({
 }) {
   return (
     <div
-      className="relative flex h-20 p-4 justify-between mt-auto"
+      className="relative flex h-16 xl:h-18 p-3 xl:p-4 justify-between mt-auto rounded-b-2xl"
       style={{
         backgroundColor: themeValues.iosBackgroundImage ? "transparent" : themeValues.backgroundColor,
         backgroundImage: `url(${themeValues.iosBackgroundImage})`,
@@ -32,18 +32,18 @@ export function TabBarBottom({
       {/* 첫번째 */}
       <div
         className={clsx(
-          "relative w-12 h-12  rounded-full",
-          !!isActive.iosFriendsNormalIconImage && !!themeValues.iosFriendsNormalIconImage
+          "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
+          !!isActive.iosChatsNormalIconImage && !!themeValues.iosChatsNormalIconImage
             ? ""
-            : !!!isActive.iosFriendsNormalIconImage && !!themeValues.iosFriendsSelectedIconImage
+            : !!!isActive.iosChatsNormalIconImage && !!themeValues.iosChatsSelectedIconImage
             ? ""
             : "bg-gray-200"
         )}
         style={{
           backgroundImage: `url(${
-            !!isActive.iosFriendsNormalIconImage
-              ? themeValues.iosFriendsNormalIconImage
-              : themeValues.iosFriendsSelectedIconImage
+            !!isActive.iosChatsNormalIconImage
+              ? themeValues.iosChatsNormalIconImage
+              : themeValues.iosChatsSelectedIconImage
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -57,7 +57,7 @@ export function TabBarBottom({
       {/* 두번째 */}
       <div
         className={clsx(
-          "relative w-12 h-12  rounded-full",
+          "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
           !!isActive.iosChatsNormalIconImage && !!themeValues.iosChatsNormalIconImage
             ? ""
             : !!!isActive.iosChatsNormalIconImage && !!themeValues.iosChatsSelectedIconImage
@@ -82,7 +82,7 @@ export function TabBarBottom({
       {/* 세번째 */}
       <div
         className={clsx(
-          "relative w-12 h-12  rounded-full",
+          "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
           !!isActive.iosOpenchatsNormalIconImage && !!themeValues.iosOpenchatsNormalIconImage
             ? ""
             : !!!isActive.iosOpenchatsNormalIconImage && !!themeValues.iosOpenchatsSelectedIconImage
@@ -107,7 +107,7 @@ export function TabBarBottom({
       {/* 네번째 */}
       <div
         className={clsx(
-          "relative w-12 h-12  rounded-full",
+          "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
           !!isActive.iosShoppingNormalIconImage && !!themeValues.iosShoppingNormalIconImage
             ? ""
             : !!!isActive.iosShoppingNormalIconImage && !!themeValues.iosShoppingSelectedIconImage
@@ -132,7 +132,7 @@ export function TabBarBottom({
       {/* 다섯번째 */}
       <div
         className={clsx(
-          "relative w-12 h-12  rounded-full",
+          "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
           !!isActive.iosMoreNormalIconImage && !!themeValues.iosMoreNormalIconImage
             ? ""
             : !!!isActive.iosMoreNormalIconImage && !!themeValues.iosMoreSelectedIconImage
