@@ -4,7 +4,13 @@ import Slider from "react-slick";
 import { useAuth } from "@/hooks/useAuth";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ThemeSample1 from "@/assets/Images/themeSample1.webp";
+import ThemeSample2 from "@/assets/Images/themeSample2.webp";
+import ThemeSample3 from "@/assets/Images/themeSample3.webp";
+import ThemeSample4 from "@/assets/Images/themeSample4.webp";
+import ThemeSample5 from "@/assets/Images/themeSample5.webp";
 
+const themeSampleList = [ThemeSample1, ThemeSample2, ThemeSample3, ThemeSample4, ThemeSample5];
 const sliderStyles = `
   .slick-slider, .slick-list, .slick-track {
     height: 100%;
@@ -13,6 +19,9 @@ const sliderStyles = `
     height: 100%;
     > div {
       height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 `;
@@ -28,7 +37,7 @@ export const AuthLayout = () => {
     arrows: false,
     centerMode: false,
     centerPadding: "0px",
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 5000,
     draggable: true,
     fade: false,
@@ -47,15 +56,11 @@ export const AuthLayout = () => {
       <style>{sliderStyles}</style>
       <div className="min-w-80 w-screen h-screen grid grid-cols-1 lg:grid-cols-2">
         {/* 왼쪽 캐러셀 */}
-        <div className="hidden lg:block w-full h-screen bg-primary/5">
-          <Slider {...settings}>
-            {Array.from({ length: 4 }).map((_, index) => (
-              <div key={index} className="h-full">
-                <Card className="h-[700px] m-8 rounded-xl ">
-                  <CardContent className="flex h-full items-center justify-center p-0">
-                    <span className="text-4xl font-semibold">{index + 1}</span>
-                  </CardContent>
-                </Card>
+        <div className="hidden lg:block w-full h-full bg-primary/5">
+          <Slider {...settings} className="h-full active:border-none">
+            {themeSampleList.map((theme, index) => (
+              <div key={index} className="p-6">
+                <img src={theme} alt="theme" className="object-contain " />
               </div>
             ))}
           </Slider>

@@ -6,8 +6,9 @@ import { ThemeDropDown } from "../dropdown-menu/ThemeDropDown";
 
 const getPageTitle = (path: string) => {
   const pathSegments = path.split("/").filter(Boolean);
-  const currentPage = pathSegments[pathSegments.length - 1];
-  const parentPage = pathSegments[pathSegments.length - 2];
+  // 여기 끝에서 빼는게 아니라 시작 지점부터로 바꿔야 할듯
+  const currentPage = pathSegments[1];
+  const parentPage = pathSegments[0];
 
   const getParentTitle = (parent: string) => {
     switch (parent) {

@@ -26,45 +26,46 @@ export const useAuth = () => {
     const refreshToken = Cookies.get(getCookieKeys().refreshToken);
     return !!(accessToken || refreshToken);
   });
+
   const navigate = useNavigate();
   const cookieKeys = getCookieKeys();
 
-  const VerifyToken = async () => {
-    const accessToken = Cookies.get(cookieKeys.accessToken);
-    const refreshToken = Cookies.get(cookieKeys.refreshToken);
+  // const VerifyToken = async () => {
+  //   const accessToken = Cookies.get(cookieKeys.accessToken);
+  //   const refreshToken = Cookies.get(cookieKeys.refreshToken);
 
-    if (!accessToken && !refreshToken) {
-      setIsAuthenticated(false);
-      return null;
-    }
+  //   if (!accessToken && !refreshToken) {
+  //     setIsAuthenticated(false);
+  //     return null;
+  //   }
 
-    if (accessToken) {
-      try {
-        // 액세스 토큰 유효성 검사
-        await APIClient.get("/auth/verify", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        setIsAuthenticated(true);
-        return { accessToken };
-      } catch (error) {
-        // 액세스 토큰이 만료된 경우 리프레시 토큰으로 갱신 시도
-        if (refreshToken) {
-          await refreshMutation.mutateAsync(refreshToken);
-        } else {
-          setIsAuthenticated(false);
-          navigate("/auth/login");
-        }
-      }
-    }
+  //   if (accessToken) {
+  //     try {
+  //       // 액세스 토큰 유효성 검사
+  //       await APIClient.get("/auth/verify", {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       });
+  //       setIsAuthenticated(true);
+  //       return { accessToken };
+  //     } catch (error) {
+  //       // 액세스 토큰이 만료된 경우 리프레시 토큰으로 갱신 시도
+  //       if (refreshToken) {
+  //         await refreshMutation.mutateAsync(refreshToken);
+  //       } else {
+  //         setIsAuthenticated(false);
+  //         navigate("/auth/login");
+  //       }
+  //     }
+  //   }
 
-    if (refreshToken) {
-      await refreshMutation.mutateAsync(refreshToken);
-    }
+  //   if (refreshToken) {
+  //     await refreshMutation.mutateAsync(refreshToken);
+  //   }
 
-    return null;
-  };
+  //   return null;
+  // };
 
   // 토큰 갱신 mutation
   // useMutation은 리액트 쿼리의 훅으로 서버에 데이터를 수정/갱신 하는 비동기 요청을 보낼 때 사용
@@ -87,20 +88,20 @@ export const useAuth = () => {
     },
   });
 
-  // 인증 상태 체크 query
-  // useQuery는 서버에서 데이터를 가져오는 비동기 요청을 보낼 때 사용
-  const { data, isLoading, error } = useQuery({
-    // queryKey는 비동기 요청을 식별하는 고유 키
-    queryKey: ["auth"],
-    // queryFn은 비동기 요청을 보낼 때 사용
-    queryFn: async () => {
-      return VerifyToken();
-    },
-    // retry는 비동기 요청이 실패했을 때 재시도 여부, false는 재시도 하지 않음
-    retry: false,
-    // refetchOnWindowFocus는 윈도우가 포커스를 잃었을 때 데이터를 다시 가져올지 여부, false는 다시 가져오지 않음
-    refetchOnWindowFocus: false,
-  });
+  // // 인증 상태 체크 query
+  // // useQuery는 서버에서 데이터를 가져오는 비동기 요청을 보낼 때 사용
+  // const { data, isLoading, error } = useQuery({
+  //   // queryKey는 비동기 요청을 식별하는 고유 키
+  //   queryKey: ["auth"],
+  //   // queryFn은 비동기 요청을 보낼 때 사용
+  //   queryFn: async () => {
+  //     return VerifyToken();
+  //   },
+  //   // retry는 비동기 요청이 실패했을 때 재시도 여부, false는 재시도 하지 않음
+  //   retry: false,
+  //   // refetchOnWindowFocus는 윈도우가 포커스를 잃었을 때 데이터를 다시 가져올지 여부, false는 다시 가져오지 않음
+  //   refetchOnWindowFocus: false,
+  // });
 
   const logout = () => {
     Cookies.remove(cookieKeys.accessToken);
@@ -130,9 +131,9 @@ export const useAuth = () => {
   // }, [navigate]);
 
   return {
-    isAuthenticated,
+    // isAuthenticated,
     setIsAuthenticated,
-    isLoading,
+    // isLoading,
     logout,
   };
 };
