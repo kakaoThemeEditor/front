@@ -1,38 +1,37 @@
-import { ColorInput } from "../common/ColorInput";
-import { SectionHeader } from "../common/SectionHeader";
-import { EditTableRow } from "../common/EditTableRow";
-import ImageFileButton from "../button/ImageFileButton";
+import { ColorInput } from "../../input/ColorInput";
+import { SectionHeader } from "../table/SectionHeader";
+import { EditTableRow } from "../table/EditTableRow";
+import ImageFileButton from "../../input/ImageFileButton";
 import { RotateCw } from "lucide-react";
-import EditTableInnerRow from "../common/EditTableInnerRow";
-import { EditTableInnerRowTextCell } from "../common/EditTableInnerRowTextCell";
-import { ThemeValues } from "../kakaoScreens/passcode/type";
+import EditTableInnerRow from "../table/EditTableInnerRow";
+import { EditTableInnerRowTextCell } from "../table/EditTableInnerRowTextCell";
+import { PasscodeTheme } from "./type";
+import { useThemeStore } from "@/store/themeStore";
 
 export function PassCodeEditTable({
-  themeValues,
-  setThemeValues,
   activeSelected,
   setActiveSelected,
 }: {
-  themeValues: ThemeValues;
-  setThemeValues: React.Dispatch<React.SetStateAction<ThemeValues>>;
   activeSelected: boolean;
   setActiveSelected: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const { passcode, setPasscode } = useThemeStore();
+
   const handleChange = (
-    key: keyof ThemeValues,
+    key: keyof PasscodeTheme,
     subKey:
-      | keyof ThemeValues["BackgroundStyle-Passcode"]
-      | keyof ThemeValues["LabelStyle-PasscodeTitle"]
-      | keyof ThemeValues["BulletStyle-Passcode"],
+      | keyof PasscodeTheme["BackgroundStyle-Passcode"]
+      | keyof PasscodeTheme["LabelStyle-PasscodeTitle"]
+      | keyof PasscodeTheme["BulletStyle-Passcode"],
     value: string | File
   ) => {
-    setThemeValues((prev) => ({
-      ...prev,
+    setPasscode({
+      ...passcode,
       [key]: {
-        ...prev[key],
+        ...passcode[key],
         [subKey]: value,
       },
-    }));
+    });
   };
 
   return (
@@ -43,7 +42,7 @@ export function PassCodeEditTable({
         <EditTableInnerRow>
           <div className="px-2 py-1">배경 컬러</div>
           <ColorInput
-            value={themeValues["BackgroundStyle-Passcode"]["background-color"]}
+            value={passcode["BackgroundStyle-Passcode"]["background-color"]}
             onChange={(value) => handleChange("BackgroundStyle-Passcode", "background-color", value)}
           />
           <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">
@@ -64,7 +63,7 @@ export function PassCodeEditTable({
         <EditTableInnerRow>
           <div className="px-2 py-1">텍스트 컬러</div>
           <ColorInput
-            value={themeValues["LabelStyle-PasscodeTitle"]["-ios-text-color"]}
+            value={passcode["LabelStyle-PasscodeTitle"]["-ios-text-color"]}
             onChange={(value) => handleChange("LabelStyle-PasscodeTitle", "-ios-text-color", value)}
           />
           <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">
@@ -141,7 +140,7 @@ export function PassCodeEditTable({
         <EditTableInnerRow>
           <div className="px-2 py-1">키패드 배경 컬러</div>
           <ColorInput
-            value={themeValues["BulletStyle-Passcode"]["-ios-keypad-background-color"]}
+            value={passcode["BulletStyle-Passcode"]["-ios-keypad-background-color"]}
             onChange={(value) => handleChange("BulletStyle-Passcode", "-ios-keypad-background-color", value)}
           />
           <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">
@@ -154,7 +153,7 @@ export function PassCodeEditTable({
         <EditTableInnerRow>
           <div className="px-2 py-1">키패드 숫자 텍스트 컬러</div>
           <ColorInput
-            value={themeValues["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"]}
+            value={passcode["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"]}
             onChange={(value) => handleChange("BulletStyle-Passcode", "-ios-keypad-text-normal-color", value)}
           />
           <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">

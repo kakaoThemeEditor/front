@@ -1,4 +1,4 @@
-export interface MessageNotificationBar {
+export interface MessageNotificationBarType {
   "BackgroundStyle-ChatRoom": {
     "background-color": string;
     "-ios-background-image": string;
@@ -18,7 +18,7 @@ export interface MessageNotificationBar {
   "LabelStyle-DirectShareBarName": {
     "-ios-text-color": string;
   };
-  "LabelStyle DirectShareBarMessage": {
+  "LabelStyle-DirectShareBarMessage": {
     "-ios-text-color": string;
   };
 }

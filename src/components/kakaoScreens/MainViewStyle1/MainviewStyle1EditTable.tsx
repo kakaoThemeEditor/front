@@ -1,29 +1,27 @@
-import { ColorInput } from "../common/ColorInput";
-import { SectionHeader } from "../common/SectionHeader";
-import { EditTableRow } from "../common/EditTableRow";
-import EditTableInnerRow from "../common/EditTableInnerRow";
-import { MainViewStyle1Theme } from "../kakaoScreens/MainViewStyle1/type";
-import { AlphaInput } from "../common/AlphaInput";
+import { ColorInput } from "../../input/ColorInput";
+import { SectionHeader } from "../table/SectionHeader";
+import { EditTableRow } from "../table/EditTableRow";
+import EditTableInnerRow from "../table/EditTableInnerRow";
+import { MainViewStyle1Theme } from "./type";
+import { AlphaInput } from "../../input/AlphaInput";
 import { RotateCw } from "lucide-react";
+import { useThemeStore } from "@/store/themeStore";
 
-interface MainviewStyle1EditTableProps {
-  themeValues: MainViewStyle1Theme;
-  setThemeValues: React.Dispatch<React.SetStateAction<MainViewStyle1Theme>>;
-}
+export default function MainviewStyle1EditTable() {
+  const { mv1Theme, setMv1Theme } = useThemeStore();
 
-export default function MainviewStyle1EditTable({ themeValues, setThemeValues }: MainviewStyle1EditTableProps) {
   const handleChange = (
     key: keyof MainViewStyle1Theme,
     subKey: keyof MainViewStyle1Theme["HeaderStyle-Main"] | keyof MainViewStyle1Theme["MainViewStyle-Primary"],
     value: string | number
   ) => {
-    setThemeValues((prev) => ({
-      ...prev,
+    setMv1Theme({
+      ...mv1Theme,
       [key]: {
-        ...prev[key],
+        ...mv1Theme[key],
         [subKey]: value,
       },
-    }));
+    });
   };
 
   return (
@@ -34,7 +32,7 @@ export default function MainviewStyle1EditTable({ themeValues, setThemeValues }:
         <EditTableInnerRow>
           <div className="px-2 py-1">헤더 텍스트 컬러</div>
           <ColorInput
-            value={themeValues["HeaderStyle-Main"]["-ios-text-color"]}
+            value={mv1Theme["HeaderStyle-Main"]["-ios-text-color"]}
             onChange={(value) => handleChange("HeaderStyle-Main", "-ios-text-color", value)}
           />
           <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">
@@ -50,7 +48,7 @@ export default function MainviewStyle1EditTable({ themeValues, setThemeValues }:
           <EditTableInnerRow>
             <div className="px-2 py-1">설명/라스트메시지 컬러</div>
             <ColorInput
-              value={themeValues["MainViewStyle-Primary"]["-ios-paragraph-text-color"]}
+              value={mv1Theme["MainViewStyle-Primary"]["-ios-paragraph-text-color"]}
               onChange={(value) => handleChange("MainViewStyle-Primary", "-ios-paragraph-text-color", value)}
             />
             <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">
@@ -60,7 +58,7 @@ export default function MainviewStyle1EditTable({ themeValues, setThemeValues }:
           <EditTableInnerRow>
             <div className="px-2 py-1">설명/라스트메시지 프레스 컬러</div>
             <ColorInput
-              value={themeValues["MainViewStyle-Primary"]["-ios-paragraph-highlighted-text-color"]}
+              value={mv1Theme["MainViewStyle-Primary"]["-ios-paragraph-highlighted-text-color"]}
               onChange={(value) =>
                 handleChange("MainViewStyle-Primary", "-ios-paragraph-highlighted-text-color", value)
               }
@@ -75,7 +73,7 @@ export default function MainviewStyle1EditTable({ themeValues, setThemeValues }:
           <EditTableInnerRow>
             <div className="px-2 py-1">리스트 배경 컬러</div>
             <ColorInput
-              value={themeValues["MainViewStyle-Primary"]["-ios-normal-background-color"]}
+              value={mv1Theme["MainViewStyle-Primary"]["-ios-normal-background-color"]}
               onChange={(value) => handleChange("MainViewStyle-Primary", "-ios-normal-background-color", value)}
             />
             <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">
@@ -85,7 +83,7 @@ export default function MainviewStyle1EditTable({ themeValues, setThemeValues }:
           <EditTableInnerRow>
             <div className="px-2 py-1">리스트 배경 투명도</div>
             <AlphaInput
-              value={themeValues["MainViewStyle-Primary"]["-ios-normal-background-alpha"]}
+              value={mv1Theme["MainViewStyle-Primary"]["-ios-normal-background-alpha"]}
               onChange={(value) => handleChange("MainViewStyle-Primary", "-ios-normal-background-alpha", value)}
             />
           </EditTableInnerRow>
@@ -95,7 +93,7 @@ export default function MainviewStyle1EditTable({ themeValues, setThemeValues }:
           <EditTableInnerRow>
             <div className="px-2 py-1">리스트 배경 프레스 컬러</div>
             <ColorInput
-              value={themeValues["MainViewStyle-Primary"]["-ios-selected-background-color"]}
+              value={mv1Theme["MainViewStyle-Primary"]["-ios-selected-background-color"]}
               onChange={(value) => handleChange("MainViewStyle-Primary", "-ios-selected-background-color", value)}
             />
             <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">
@@ -105,7 +103,7 @@ export default function MainviewStyle1EditTable({ themeValues, setThemeValues }:
           <EditTableInnerRow>
             <div className="px-2 py-1">리스트 배경 프레스 투명도</div>
             <AlphaInput
-              value={themeValues["MainViewStyle-Primary"]["-ios-selected-background-alpha"]}
+              value={mv1Theme["MainViewStyle-Primary"]["-ios-selected-background-alpha"]}
               onChange={(value) => handleChange("MainViewStyle-Primary", "-ios-selected-background-alpha", value)}
             />
           </EditTableInnerRow>

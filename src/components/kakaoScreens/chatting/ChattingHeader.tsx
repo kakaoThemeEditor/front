@@ -1,4 +1,3 @@
-import CircleButton from "@/components/button/CircleButton";
 import clsx from "clsx";
 import { ChevronLeftIcon, SearchIcon, MenuIcon } from "lucide-react";
 export function ChattingHeader({ className }: { className?: string }) {

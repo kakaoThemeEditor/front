@@ -33,10 +33,13 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/collapsible/Collapsible";
-import { useState } from "react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/Collapsible";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { useTheme } from "@/context/ThemeContext";
+import { useQuery } from "@tanstack/react-query";
+import { APIClient } from "@/api/ApiHandler";
+import { useEditorStore } from "@/store/editorStore";
 
 type SidebarContextProps = {
   state: "expanded" | "collapsed";
@@ -60,6 +63,8 @@ interface IsOpenOptionsProps {
 }
 
 export function AppSidebar() {
+  const { currentThemeId } = useEditorStore();
+
   const { state, open, setOpen, openMobile, setOpenMobile, toggleSidebar } = useSidebar();
   const { logout } = useAuth();
 
@@ -75,6 +80,7 @@ export function AppSidebar() {
   });
 
   const { theme, toggleTheme } = useTheme();
+
   return (
     <Collapsible defaultOpen className="group/collapsible">
       <Sidebar variant="sidebar" collapsible="icon" className="border-none">
@@ -99,7 +105,12 @@ export function AppSidebar() {
                 <SidebarGroupLabel>
                   <CollapsibleTrigger
                     className="w-full flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-800  rounded-md transition-colors"
-                    onClick={() => setIsOpenOptions({ ...isOpenOptions, main: !isOpenOptions.main })}
+                    onClick={() =>
+                      setIsOpenOptions({
+                        ...isOpenOptions,
+                        main: !isOpenOptions.main,
+                      })
+                    }
                   >
                     메인
                     <ChevronDown
@@ -136,7 +147,12 @@ export function AppSidebar() {
                 <SidebarGroupLabel>
                   <CollapsibleTrigger
                     className="w-full flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
-                    onClick={() => setIsOpenOptions({ ...isOpenOptions, product: !isOpenOptions.product })}
+                    onClick={() =>
+                      setIsOpenOptions({
+                        ...isOpenOptions,
+                        product: !isOpenOptions.product,
+                      })
+                    }
                   >
                     상품
                     <ChevronDown
@@ -190,7 +206,12 @@ export function AppSidebar() {
                 <SidebarGroupLabel>
                   <CollapsibleTrigger
                     className="w-full flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-800  rounded-md transition-colors"
-                    onClick={() => setIsOpenOptions({ ...isOpenOptions, order: !isOpenOptions.order })}
+                    onClick={() =>
+                      setIsOpenOptions({
+                        ...isOpenOptions,
+                        order: !isOpenOptions.order,
+                      })
+                    }
                   >
                     주문/결제
                     <ChevronDown
@@ -236,7 +257,12 @@ export function AppSidebar() {
                 <SidebarGroupLabel>
                   <CollapsibleTrigger
                     className="w-full flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-800  rounded-md transition-colors"
-                    onClick={() => setIsOpenOptions({ ...isOpenOptions, account: !isOpenOptions.account })}
+                    onClick={() =>
+                      setIsOpenOptions({
+                        ...isOpenOptions,
+                        account: !isOpenOptions.account,
+                      })
+                    }
                   >
                     내 계정
                     <ChevronDown
@@ -270,7 +296,12 @@ export function AppSidebar() {
                       </Link>
                     </SidebarMenuItem>
                     <SidebarMenuItem className={clsx(state === "expanded" && "px-2")}>
-                      <SidebarMenuButton onClick={logout}>
+                      {/* logout */}
+                      <SidebarMenuButton
+                        onClick={() => {
+                          logout();
+                        }}
+                      >
                         <LogOut className="mr-2 h-4 w-4" />
                         <span>로그아웃</span>
                       </SidebarMenuButton>
@@ -288,7 +319,12 @@ export function AppSidebar() {
                 <SidebarGroupLabel>
                   <CollapsibleTrigger
                     className="w-full flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-800  rounded-md transition-colors"
-                    onClick={() => setIsOpenOptions({ ...isOpenOptions, template: !isOpenOptions.template })}
+                    onClick={() =>
+                      setIsOpenOptions({
+                        ...isOpenOptions,
+                        template: !isOpenOptions.template,
+                      })
+                    }
                   >
                     나의 카카오톡 테마
                     <ChevronDown
@@ -334,7 +370,12 @@ export function AppSidebar() {
                 <SidebarGroupLabel>
                   <CollapsibleTrigger
                     className="w-full flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-800  rounded-md transition-colors"
-                    onClick={() => setIsOpenOptions({ ...isOpenOptions, editor: !isOpenOptions.editor })}
+                    onClick={() =>
+                      setIsOpenOptions({
+                        ...isOpenOptions,
+                        editor: !isOpenOptions.editor,
+                      })
+                    }
                   >
                     편집기
                     <ChevronDown
@@ -352,7 +393,7 @@ export function AppSidebar() {
                 <SidebarGroupContent>
                   <SidebarMenu>
                     <SidebarMenuItem className={clsx(state === "expanded" && "px-2")}>
-                      <Link to="/editor/kakao">
+                      <Link to={`/editor/kakao${currentThemeId ? "/" + currentThemeId + "/MainViewStyle1" : ""}`}>
                         <SidebarMenuButton>
                           <LaughIcon className="mr-2 h-4 w-4" />
                           <span>카카오톡 테마 편집</span>
@@ -388,7 +429,12 @@ export function AppSidebar() {
                 <SidebarGroupLabel>
                   <CollapsibleTrigger
                     className="w-full flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-800  rounded-md transition-colors"
-                    onClick={() => setIsOpenOptions({ ...isOpenOptions, notification: !isOpenOptions.notification })}
+                    onClick={() =>
+                      setIsOpenOptions({
+                        ...isOpenOptions,
+                        notification: !isOpenOptions.notification,
+                      })
+                    }
                   >
                     알림
                     <ChevronDown
@@ -426,7 +472,12 @@ export function AppSidebar() {
                 <SidebarGroupLabel>
                   <CollapsibleTrigger
                     className="w-full flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-800  rounded-md transition-colors"
-                    onClick={() => setIsOpenOptions({ ...isOpenOptions, setting: !isOpenOptions.setting })}
+                    onClick={() =>
+                      setIsOpenOptions({
+                        ...isOpenOptions,
+                        setting: !isOpenOptions.setting,
+                      })
+                    }
                   >
                     설정
                     <ChevronDown

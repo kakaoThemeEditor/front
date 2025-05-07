@@ -30,11 +30,10 @@ export const Register = () => {
   const cookieKeys = getCookieKeys();
   const [formData, setFormData] = React.useState({
     email: "",
-    emailVerify: "",
+    // emailVerify: "",
     password: "",
     passwordCheck: "",
   });
-  const [sendEmailVerify, setSendEmailVerify] = React.useState(false);
   const [revealPassword, setRevealPassword] = React.useState(false);
   const [revealPasswordCheck, setRevealPasswordCheck] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -44,11 +43,11 @@ export const Register = () => {
     setIsLoading(true);
 
     try {
-      // 이메일 인증 확인
-      if (!sendEmailVerify) {
-        toast.error("이메일 인증이 필요합니다.");
-        return;
-      }
+      // // 이메일 인증 확인
+      // if (!sendEmailVerify) {
+      //   toast.error("이메일 인증이 필요합니다.");
+      //   return;
+      // }
 
       // 비밀번호 확인
       if (formData.password !== formData.passwordCheck) {
@@ -58,9 +57,9 @@ export const Register = () => {
 
       // 회원가입 요청
       const response = await APIClient.post("/auth/register", {
+        name: formData.email,
         email: formData.email,
         password: formData.password,
-        verificationCode: formData.emailVerify,
       });
 
       const { accessToken, refreshToken, user } = response.data;
@@ -86,30 +85,36 @@ export const Register = () => {
     }));
   };
 
-  const handleEmailVerify = async () => {
-    try {
-      await APIClient.post("/auth/verify-email", {
-        email: formData.email,
-        code: "123456", // 테스트용 고정 코드
-      });
-      setSendEmailVerify(true);
-      toast.success("이메일 인증이 완료되었습니다.");
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || "이메일 인증에 실패했습니다.");
-    }
-  };
+  // const handleEmailVerify = async () => {
+  //   try {
+  //     await APIClient.post("/auth/send-verification-email", {
+  //       email: formData.email,
+  //     });
+  //     setSendEmailVerify(true);
+  //     toast.success("인증 이메일이 전송되었습니다.");
+  //   } catch (error: any) {
+  //     toast.error(
+  //       error.response?.data?.message || "이메일 인증에 실패했습니다."
+  //     );
+  //   }
+  // };
 
   return (
     <div className="flex flex-col items-center justify-center p-8 w-full h-full bg-white">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center space-y-2">
-          <h2 className="text-2xl font-bold text-kakao-dark">카카오 에디터 회원가입</h2>
+          <h2 className="text-2xl font-bold text-kakao-dark">
+            카카오 에디터 회원가입
+          </h2>
           <p className="text-gray-600">얼른 회원가입하고 이용하세요!</p>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div className="">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               이메일
             </label>
             <div className="relative mb-5">
@@ -124,20 +129,23 @@ export const Register = () => {
                   className="mt-1 focus:border-kakao-dark focus:ring-kakao-dark rounded-md"
                   placeholder="이메일을 입력해주세요"
                 />
-                <Button
+                {/* <Button
                   type="button"
                   onClick={handleEmailVerify}
                   className="mt-1 bg-kakao-dark hover:bg-kakao-dark/90 text-white whitespace-nowrap"
                   disabled={!formData.email}
                 >
                   이메일 인증
-                </Button>
+                </Button> */}
               </div>
             </div>
 
-            {sendEmailVerify && (
+            {/* {sendEmailVerify && (
               <div>
-                <label htmlFor="emailVerify" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="emailVerify"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   이메일 인증번호
                 </label>
                 <Input
@@ -150,9 +158,12 @@ export const Register = () => {
                   placeholder="인증번호를 입력하세요"
                 />
               </div>
-            )}
+            )} */}
 
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               비밀번호
             </label>
             <div className="relative mb-5">
@@ -174,13 +185,19 @@ export const Register = () => {
                   <EyeOff className="absolute right-1 top-1/2 -translate-y-1/2 text-gray-500" />
                 </button>
               ) : (
-                <button onClick={() => setRevealPassword(true)} className="absolute right-2 top-1/2 -translate-y-1/2">
+                <button
+                  onClick={() => setRevealPassword(true)}
+                  className="absolute right-2 top-1/2 -translate-y-1/2"
+                >
                   <EyeIcon className="absolute right-1 top-1/2 -translate-y-1/2 text-gray-500" />
                 </button>
               )}
             </div>
 
-            <label htmlFor="passwordCheck" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="passwordCheck"
+              className="block text-sm font-medium text-gray-700"
+            >
               비밀번호 확인
             </label>
             <div className="relative mb-5">
@@ -216,7 +233,10 @@ export const Register = () => {
             type="submit"
             className="w-full bg-kakao-dark hover:bg-kakao-dark/90 text-white py-2 rounded-md"
             disabled={
-              isLoading || !formData.email || !formData.emailVerify || !formData.password || !formData.passwordCheck
+              isLoading ||
+              !formData.email ||
+              !formData.password ||
+              !formData.passwordCheck
             }
           >
             {isLoading ? "회원가입 중..." : "회원가입"}
@@ -225,16 +245,25 @@ export const Register = () => {
 
         <div className="mt-4 text-center space-y-2">
           <div className="flex justify-center gap-4">
-            <Link to="/auth/find-email" className="text-sm text-gray-500 hover:text-kakao-dark">
+            <Link
+              to="/auth/find-email"
+              className="text-sm text-gray-500 hover:text-kakao-dark"
+            >
               아이디 찾기
             </Link>
             <span className="text-sm text-gray-500">|</span>
-            <Link to="/auth/find-password" className="text-sm text-gray-500 hover:text-kakao-dark">
+            <Link
+              to="/auth/find-password"
+              className="text-sm text-gray-500 hover:text-kakao-dark"
+            >
               비밀번호 찾기
             </Link>
           </div>
           <div>
-            <Link to="/auth/login" className="text-sm text-gray-500 hover:text-kakao-dark">
+            <Link
+              to="/auth/login"
+              className="text-sm text-gray-500 hover:text-kakao-dark"
+            >
               이미 계정이 있으신가요? 로그인
             </Link>
           </div>

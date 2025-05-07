@@ -1,16 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { ThemeStyleDropDown } from "@/components/dropdown-menu/ThemeStyleDropDown";
-import { TabBarEditTable } from "@/components/table/TabBarEditTable";
-import { ThemeValues, IsActive } from "./type";
+import { TabBarEditTable } from "./TabBarEditTable";
+import { IsActive } from "./type";
 
-interface TabBarEditorProps {
-  themeValues: ThemeValues;
-  setThemeValues: React.Dispatch<React.SetStateAction<ThemeValues>>;
+export function TabBarEditor({
+  isActive,
+  setIsActive,
+}: {
   isActive: IsActive;
-  setIsActive: React.Dispatch<React.SetStateAction<IsActive>>;
-}
-
-export function TabBarEditor({ themeValues, setThemeValues, isActive, setIsActive }: TabBarEditorProps) {
+  setIsActive: (isActive: IsActive) => void;
+}) {
   return (
     <div className="w-full xl:w-11/12 mx-auto p-6  overflow-auto">
       <div className="flex justify-between mb-4 w-full">
@@ -19,12 +18,7 @@ export function TabBarEditor({ themeValues, setThemeValues, isActive, setIsActiv
           저장하기
         </Button>
       </div>
-      <TabBarEditTable
-        themeValues={themeValues}
-        setThemeValues={setThemeValues}
-        isActive={isActive}
-        setIsActive={setIsActive}
-      />
+      <TabBarEditTable isActive={isActive} setIsActive={setIsActive} />
     </div>
   );
 }

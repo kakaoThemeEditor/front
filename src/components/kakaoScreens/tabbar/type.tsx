@@ -1,5 +1,5 @@
 //prettier-ignore
-export interface ThemeValues {
+export interface TabbarTheme {
   "TabbarStyle-Main": {
     "-ios-background-image": string;
     "background-color": string;

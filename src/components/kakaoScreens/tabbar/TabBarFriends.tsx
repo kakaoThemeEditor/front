@@ -1,24 +1,16 @@
-import { PlusIcon, GiftIcon } from "lucide-react";
-import { IoChevronUp } from "react-icons/io5";
+import { GiftIcon } from "lucide-react";
 import ProfileImg01 from "../../../assets/Images/profileImg01@3x.png";
-import clsx from "clsx";
-import { AdButton } from "@/components/common/AdButton";
-import { SmallText } from "@/components/common/SmallText";
-import { PreviewProfile } from "@/components/common/PreviewProfile";
-import { IconButton } from "@/components/common/IconButton";
+import { AdButton } from "@/components/kakaoScreens/preview/AdButton";
+import { SmallText } from "@/components/text/SmallText";
+import { PreviewProfile } from "@/components/kakaoScreens/preview/PreviewProfile";
+import { IconButton } from "@/components/button/IconButton";
 import SpeechBubble from "@/components/button/SpeechBubble";
-import { ThemeValues } from "./type";
-import { PreviewPung } from "@/components/common/PreviewPung";
+import { PreviewPung } from "@/components/kakaoScreens/preview/PreviewPung";
+import { useThemeStore } from "@/store/themeStore";
 
-export function TabBarFriends({
-  className,
-  themeValues,
-  setThemeValues,
-}: {
-  className?: string;
-  themeValues: ThemeValues;
-  setThemeValues: React.Dispatch<React.SetStateAction<ThemeValues>>;
-}) {
+export function TabBarFriends({}: {}) {
+  const { tabbar } = useThemeStore();
+
   return (
     <>
       {/* 펑 */}
@@ -45,7 +37,7 @@ export function TabBarFriends({
                 className="absolute -top-4 left-1 transform translate-x-1/2"
               />
             }
-            textColor={themeValues["FeatureStyle-Primary"]["-ios-text-color"]}
+            textColor={tabbar["FeatureStyle-Primary"]["-ios-text-color"]}
           />
         </div>
       </div>

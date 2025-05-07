@@ -4,7 +4,11 @@ interface MessageCirclePlusProps {
   color?: string;
 }
 
-export function MessageCirclePlus({ className = "", size = 21, color = "" }: MessageCirclePlusProps) {
+export function MessageCirclePlus({
+  className = "",
+  size = 21,
+  color = "currentColor", // 기본 색 추가
+}: MessageCirclePlusProps) {
   return (
     <svg
       width={size}

@@ -1,5 +1,5 @@
-export interface AddFriend {
+export interface AddFriendType {
   "ButtonStyle-AddFriend": {
-    "-ios-image": string;
+    "-ios-image": string | File;
   };
 }

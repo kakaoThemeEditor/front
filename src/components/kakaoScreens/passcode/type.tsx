@@ -1,4 +1,4 @@
-export interface ThemeValues {
+export interface PasscodeTheme {
   "BackgroundStyle-Passcode": {
     "background-color": string;
     "-ios-background-image": string;

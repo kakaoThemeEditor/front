@@ -1,28 +1,20 @@
 import MaintabBgImage from "../../../assets/Images/maintabBgImage@2x.png";
 import SpeechBubble from "../../button/SpeechBubble";
 import CircleButton from "../../button/CircleButton";
-import { ThemeValues, IsActive } from "./type";
 import clsx from "clsx";
+import { useThemeStore } from "@/store/themeStore";
+import { IsActive } from "./type";
+export function TabBarBottom({ isActive }: { isActive: IsActive }) {
+  const { tabbar } = useThemeStore();
 
-export function TabBarBottom({
-  themeValues,
-  setThemeValues,
-  isActive,
-  setIsActive,
-}: {
-  themeValues: ThemeValues;
-  setThemeValues: (themeValues: ThemeValues) => void;
-  isActive: IsActive;
-  setIsActive: (isActive: IsActive) => void;
-}) {
   return (
     <div
       className="relative flex h-16 xl:h-18 p-3 xl:p-4 justify-between mt-auto rounded-b-2xl"
       style={{
-        backgroundColor: themeValues["TabbarStyle-Main"]["-ios-background-image"]
+        backgroundColor: tabbar["TabbarStyle-Main"]["-ios-background-image"]
           ? "transparent"
-          : themeValues["TabbarStyle-Main"]["background-color"],
-        backgroundImage: `url(${themeValues["TabbarStyle-Main"]["-ios-background-image"]})`,
+          : tabbar["TabbarStyle-Main"]["background-color"],
+        backgroundImage: `url(${tabbar["TabbarStyle-Main"]["-ios-background-image"]})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -32,22 +24,23 @@ export function TabBarBottom({
       </div>
 
       {/* 첫번째 */}
+
       <div
         className={clsx(
           "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
           !!isActive["TabbarStyle-Main"]["-ios-friends-normal-icon-image"] &&
-            !!themeValues["TabbarStyle-Main"]["-ios-friends-normal-icon-image"]
+            !!tabbar["TabbarStyle-Main"]["-ios-friends-normal-icon-image"]
             ? ""
             : !!!isActive["TabbarStyle-Main"]["-ios-friends-normal-icon-image"] &&
-              !!themeValues["TabbarStyle-Main"]["-ios-friends-selected-icon-image"]
+              !!tabbar["TabbarStyle-Main"]["-ios-friends-selected-icon-image"]
             ? ""
             : "bg-gray-200"
         )}
         style={{
           backgroundImage: `url(${
-            !!isActive["TabbarStyle-Main"]["-ios-friends-normal-icon-image"]
-              ? themeValues["TabbarStyle-Main"]["-ios-friends-normal-icon-image"]
-              : themeValues["TabbarStyle-Main"]["-ios-friends-selected-icon-image"]
+            isActive["TabbarStyle-Main"]["-ios-friends-normal-icon-image"]
+              ? tabbar["TabbarStyle-Main"]["-ios-friends-normal-icon-image"]
+              : tabbar["TabbarStyle-Main"]["-ios-friends-selected-icon-image"]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -63,18 +56,18 @@ export function TabBarBottom({
         className={clsx(
           "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
           !!isActive["TabbarStyle-Main"]["-ios-chats-normal-icon-image"] &&
-            !!themeValues["TabbarStyle-Main"]["-ios-chats-normal-icon-image"]
+            !!tabbar["TabbarStyle-Main"]["-ios-chats-normal-icon-image"]
             ? ""
             : !!!isActive["TabbarStyle-Main"]["-ios-chats-normal-icon-image"] &&
-              !!themeValues["TabbarStyle-Main"]["-ios-chats-selected-icon-image"]
+              !!tabbar["TabbarStyle-Main"]["-ios-chats-selected-icon-image"]
             ? ""
             : "bg-gray-200"
         )}
         style={{
           backgroundImage: `url(${
-            !!isActive["TabbarStyle-Main"]["-ios-chats-normal-icon-image"]
-              ? themeValues["TabbarStyle-Main"]["-ios-chats-normal-icon-image"]
-              : themeValues["TabbarStyle-Main"]["-ios-chats-selected-icon-image"]
+            isActive["TabbarStyle-Main"]["-ios-chats-normal-icon-image"]
+              ? tabbar["TabbarStyle-Main"]["-ios-chats-normal-icon-image"]
+              : tabbar["TabbarStyle-Main"]["-ios-chats-selected-icon-image"]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -90,18 +83,18 @@ export function TabBarBottom({
         className={clsx(
           "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
           !!isActive["TabbarStyle-Main"]["-ios-openchats-normal-icon-image"] &&
-            !!themeValues["TabbarStyle-Main"]["-ios-openchats-normal-icon-image"]
+            !!tabbar["TabbarStyle-Main"]["-ios-openchats-normal-icon-image"]
             ? ""
             : !!!isActive["TabbarStyle-Main"]["-ios-openchats-normal-icon-image"] &&
-              !!themeValues["TabbarStyle-Main"]["-ios-openchats-selected-icon-image"]
+              !!tabbar["TabbarStyle-Main"]["-ios-openchats-selected-icon-image"]
             ? ""
             : "bg-gray-200"
         )}
         style={{
           backgroundImage: `url(${
-            !!isActive["TabbarStyle-Main"]["-ios-openchats-normal-icon-image"]
-              ? themeValues["TabbarStyle-Main"]["-ios-openchats-normal-icon-image"]
-              : themeValues["TabbarStyle-Main"]["-ios-openchats-selected-icon-image"]
+            isActive["TabbarStyle-Main"]["-ios-openchats-normal-icon-image"]
+              ? tabbar["TabbarStyle-Main"]["-ios-openchats-normal-icon-image"]
+              : tabbar["TabbarStyle-Main"]["-ios-openchats-selected-icon-image"]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -117,18 +110,18 @@ export function TabBarBottom({
         className={clsx(
           "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
           !!isActive["TabbarStyle-Main"]["-ios-shopping-normal-icon-image"] &&
-            !!themeValues["TabbarStyle-Main"]["-ios-shopping-normal-icon-image"]
+            !!tabbar["TabbarStyle-Main"]["-ios-shopping-normal-icon-image"]
             ? ""
             : !!!isActive["TabbarStyle-Main"]["-ios-shopping-normal-icon-image"] &&
-              !!themeValues["TabbarStyle-Main"]["-ios-shopping-selected-icon-image"]
+              !!tabbar["TabbarStyle-Main"]["-ios-shopping-selected-icon-image"]
             ? ""
             : "bg-gray-200"
         )}
         style={{
           backgroundImage: `url(${
-            !!isActive["TabbarStyle-Main"]["-ios-shopping-normal-icon-image"]
-              ? themeValues["TabbarStyle-Main"]["-ios-shopping-normal-icon-image"]
-              : themeValues["TabbarStyle-Main"]["-ios-shopping-selected-icon-image"]
+            isActive["TabbarStyle-Main"]["-ios-shopping-normal-icon-image"]
+              ? tabbar["TabbarStyle-Main"]["-ios-shopping-normal-icon-image"]
+              : tabbar["TabbarStyle-Main"]["-ios-shopping-selected-icon-image"]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -144,18 +137,18 @@ export function TabBarBottom({
         className={clsx(
           "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
           !!isActive["TabbarStyle-Main"]["-ios-more-normal-icon-image"] &&
-            !!themeValues["TabbarStyle-Main"]["-ios-more-normal-icon-image"]
+            !!tabbar["TabbarStyle-Main"]["-ios-more-normal-icon-image"]
             ? ""
             : !!!isActive["TabbarStyle-Main"]["-ios-more-normal-icon-image"] &&
-              !!themeValues["TabbarStyle-Main"]["-ios-more-selected-icon-image"]
+              !!tabbar["TabbarStyle-Main"]["-ios-more-selected-icon-image"]
             ? ""
             : "bg-gray-200"
         )}
         style={{
           backgroundImage: `url(${
-            !!isActive["TabbarStyle-Main"]["-ios-more-normal-icon-image"]
-              ? themeValues["TabbarStyle-Main"]["-ios-more-normal-icon-image"]
-              : themeValues["TabbarStyle-Main"]["-ios-more-selected-icon-image"]
+            isActive["TabbarStyle-Main"]["-ios-more-normal-icon-image"]
+              ? tabbar["TabbarStyle-Main"]["-ios-more-normal-icon-image"]
+              : tabbar["TabbarStyle-Main"]["-ios-more-selected-icon-image"]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",

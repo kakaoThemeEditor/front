@@ -1,14 +1,19 @@
-import { ArrowUp, CameraIcon, ChevronUp, PaperclipIcon, Annoyed, Plus } from "lucide-react";
+import { ArrowUp, Annoyed, Plus } from "lucide-react";
 import ProfileImage from "../../../assets/Images/profileImg01@3x.png";
 import ChatRoomBubbleReceive from "../../../assets/Images/chatroomBubbleReceive01@2x.png";
 import ChatRoomBubbleSend from "../../../assets/Images/chatroomBubbleSend01@2x.png";
-import { SmallText } from "@/components/common/SmallText";
+import { SmallText } from "@/components/text/SmallText";
 import SpeechBubble from "@/components/button/SpeechBubble";
+import { useThemeStore } from "@/store/themeStore";
+import { isActiveType } from "./type";
 
 interface MessageProps {
   message: string;
   time: string;
-  senderName: string;
+  senderName?: string;
+  isReceived: boolean;
+  TextColor: string;
+  Image: string;
   children?: React.ReactNode;
   chatList?: React.ReactNode;
 }
@@ -28,39 +33,56 @@ const ProfileImageComponent = () => (
   />
 );
 
-const ChatBubble = ({ message, isReceived }: { message: string; isReceived: boolean }) => (
-  <div
-    className="flex items-center text-[10px] xl:text-[11px] rounded-sm px-0.5 w-fit"
-    style={{
-      borderImage: `url(${isReceived ? ChatRoomBubbleReceive : ChatRoomBubbleSend}) 30 30 30 30 fill stretch`,
-      borderWidth: "10px",
-      borderStyle: "solid",
-      height: "24px",
-    }}
-  >
-    {message}
-  </div>
-);
-
-const ReceivedMessage = ({ message, time, senderName, children, chatList }: MessageProps) => (
-  <div className="relative flex gap-1.5 px-1.5 xl:px-2 mt-2 xl:mt-3">
-    {children}
-    <ProfileImageComponent />
-    <div className="flex flex-col gap-1 xl:gap-1.5">
-      <SmallText>{senderName}</SmallText>
-      <ChatBubble message={message} isReceived={true} />
-      {chatList}
+const ChatBubble = ({
+  message,
+  isReceived,
+  TextColor,
+  Image,
+}: {
+  message: string;
+  isReceived: boolean;
+  TextColor: string;
+  Image: string;
+}) => {
+  const { messageCell } = useThemeStore();
+  if (Image === "") {
+    Image = isReceived ? ChatRoomBubbleReceive : ChatRoomBubbleSend;
+  }
+  return (
+    <div
+      className="flex items-center text-[10px] xl:text-[11px] rounded-sm px-0.5 w-fit"
+      style={{
+        borderImage: `url(${Image}) 30 30 30 30 fill stretch`,
+        borderWidth: "10px",
+        borderStyle: "solid",
+        height: "24px",
+        color: TextColor,
+      }}
+      key={Image}
+    >
+      {message}
     </div>
-  </div>
-);
+  );
+};
 
-const SentMessage = ({ message, time, children, chatList }: Omit<MessageProps, "senderName">) => (
-  <div className="relative flex flex-col items-end gap-1 px-1.5 xl:px-2">
-    {children}
-    <ChatBubble message={message} isReceived={false} />
-    {chatList}
-  </div>
-);
+const Message = ({ message, time, senderName, isReceived, children, chatList, TextColor, Image }: MessageProps) => {
+  const { messageCell } = useThemeStore();
+  return (
+    <div
+      className={`relative flex ${isReceived ? "gap-1.5" : "flex-col items-end gap-1"} px-1.5 xl:px-2 ${
+        isReceived ? "mt-2 xl:mt-3" : ""
+      }`}
+    >
+      {children}
+      {isReceived && <ProfileImageComponent />}
+      <div className={`flex flex-col gap-1 xl:gap-1.5 ${isReceived ? "" : "items-end"}`}>
+        {isReceived && <SmallText>{senderName}</SmallText>}
+        <ChatBubble message={message} isReceived={isReceived} TextColor={TextColor} Image={Image} />
+        {chatList}
+      </div>
+    </div>
+  );
+};
 
 const ChatInput = ({ placeholder }: ChatInputProps) => (
   <div className="flex gap-1.5 mt-auto py-2 px-2">
@@ -79,125 +101,244 @@ const ChatInput = ({ placeholder }: ChatInputProps) => (
   </div>
 );
 
-export default function ChattingList() {
+export default function ChattingList({ isActive }: { isActive: isActiveType }) {
+  const { messageCell } = useThemeStore();
+
   return (
     <div className="flex flex-col w-full h-full">
-      <ReceivedMessage
+      {/* 받은 메시지 첫번째 */}
+      <Message
         message="어피치어피치한"
         time="오후12:03"
         senderName="어피치"
+        isReceived={true}
+        TextColor={
+          isActive["MessageCellStyle-Receive"]["-ios-text-color"]
+            ? messageCell["MessageCellStyle-Receive"]["-ios-text-color"]
+            : messageCell["MessageCellStyle-Receive"]["-ios-selected-text-color"]
+        }
+        Image={
+          isActive["MessageCellStyle-Receive"]["-ios-background-image"]
+            ? messageCell["MessageCellStyle-Receive"]["-ios-background-image"]
+            : messageCell["MessageCellStyle-Receive"]["-ios-selected-background-image"]
+        }
         children={
           <>
             <SpeechBubble direction="bottom" className="absolute top-0 left-20">
-              2
+              1
             </SpeechBubble>
             <SpeechBubble direction="right" className="absolute top-4.5 left-3">
-              3
+              2
             </SpeechBubble>
           </>
         }
         chatList={
           <div className="relative flex items-end gap-0.5">
-            <ChatBubble message="채팅내용 입력하기" isReceived={true} />
+            <ChatBubble
+              message="채팅내용 입력하기"
+              isReceived={true}
+              TextColor={
+                isActive["MessageCellStyle-Receive"]["-ios-text-color"]
+                  ? messageCell["MessageCellStyle-Receive"]["-ios-text-color"]
+                  : messageCell["MessageCellStyle-Receive"]["-ios-selected-text-color"]
+              }
+              Image={
+                isActive["MessageCellStyle-Receive"]["-ios-background-image"]
+                  ? messageCell["MessageCellStyle-Receive"]["-ios-background-image"]
+                  : messageCell["MessageCellStyle-Receive"]["-ios-selected-background-image"]
+              }
+            />
             <div className="text-[7px] xl:text-[8px]">오후12:03</div>
             <div className="absolute top-0 bottom-0 flex items-center justify-center">
               <SpeechBubble direction="right" className="absolute top-1 -left-6">
-                4
+                3
               </SpeechBubble>
             </div>
           </div>
         }
       />
+
+      {/* 받은 메시지 두번째 */}
       <div className="my-0.5" />
-      <ReceivedMessage
+      <Message
         message="어피치어피치한"
         time="오후12:03"
         senderName="어피치"
+        isReceived={true}
+        TextColor={
+          isActive["MessageCellStyle-Receive"]["-ios-text-color"]
+            ? messageCell["MessageCellStyle-Receive"]["-ios-text-color"]
+            : messageCell["MessageCellStyle-Receive"]["-ios-selected-text-color"]
+        }
+        Image={
+          isActive["MessageCellStyle-Receive"]["-ios-group-background-image"]
+            ? messageCell["MessageCellStyle-Receive"]["-ios-group-background-image"]
+            : messageCell["MessageCellStyle-Receive"]["-ios-group-selected-background-image"]
+        }
         children={
           <>
             <SpeechBubble direction="bottom" className="absolute top-0 left-20">
-              2
+              1
             </SpeechBubble>
             <SpeechBubble direction="right" className="absolute top-4.5 left-3">
-              3
+              2
             </SpeechBubble>
           </>
         }
         chatList={
           <div className="relative flex items-end gap-0.5">
-            <ChatBubble message="채팅내용 입력하기" isReceived={true} />
+            <ChatBubble
+              message="채팅내용 입력하기"
+              isReceived={true}
+              TextColor={
+                isActive["MessageCellStyle-Receive"]["-ios-text-color"]
+                  ? messageCell["MessageCellStyle-Receive"]["-ios-text-color"]
+                  : messageCell["MessageCellStyle-Receive"]["-ios-selected-text-color"]
+              }
+              Image={
+                isActive["MessageCellStyle-Receive"]["-ios-group-background-image"]
+                  ? messageCell["MessageCellStyle-Receive"]["-ios-group-background-image"]
+                  : messageCell["MessageCellStyle-Receive"]["-ios-group-selected-background-image"]
+              }
+            />
             <div className="">
-              <div className="relative text-[7px] xl-text-[8px] text-red-500">1</div>
+              <div
+                className="relative text-[7px] xl-text-[8px] text-red-500"
+                style={{
+                  color: messageCell["MessageCellStyle-Receive"]["-ios-unread-text-color"],
+                }}
+              >
+                1
+              </div>
               <div className="text-[7px] xl:text-[8px]">오후12:03</div>
             </div>
             <div className="absolute top-0 bottom-0 flex items-center justify-center">
               <SpeechBubble direction="right" className="absolute top-1 -left-6">
-                4
+                3
               </SpeechBubble>
             </div>
             <div className="absolute top-0 bottom-0 right-0 flex items-center justify-center">
               <SpeechBubble direction="left" className="absolute top-0 -left-6">
-                5
+                4
               </SpeechBubble>
             </div>
           </div>
         }
       />
+
+      {/* 보낸 메시지 첫번째 */}
       <div className="my-1.5" />
-      <SentMessage
+      <Message
         message="어피치어피치한"
         time="오후12:03"
+        isReceived={false}
+        TextColor={
+          isActive["MessageCellStyle-Send"]["-ios-text-color"]
+            ? messageCell["MessageCellStyle-Send"]["-ios-text-color"]
+            : messageCell["MessageCellStyle-Send"]["-ios-selected-text-color"]
+        }
+        Image={
+          isActive["MessageCellStyle-Send"]["-ios-background-image"]
+            ? messageCell["MessageCellStyle-Send"]["-ios-background-image"]
+            : messageCell["MessageCellStyle-Send"]["-ios-selected-background-image"]
+        }
         children={
           <>
             <SpeechBubble direction="bottom" className="absolute -top-4 right-10">
-              6
+              5
             </SpeechBubble>
             <SpeechBubble direction="left" className="absolute top-1 -right-6">
-              7
+              6
             </SpeechBubble>
           </>
         }
         chatList={
           <div className="relative flex items-end gap-0.5">
             <div className="text-[7px] xl:text-[8px]">오후12:03</div>
-            <ChatBubble message="채팅내용 입력하기" isReceived={false} />
+            <ChatBubble
+              message="채팅내용 입력하기"
+              isReceived={false}
+              TextColor={
+                isActive["MessageCellStyle-Send"]["-ios-text-color"]
+                  ? messageCell["MessageCellStyle-Send"]["-ios-text-color"]
+                  : messageCell["MessageCellStyle-Send"]["-ios-selected-text-color"]
+              }
+              Image={
+                isActive["MessageCellStyle-Send"]["-ios-background-image"]
+                  ? messageCell["MessageCellStyle-Send"]["-ios-background-image"]
+                  : messageCell["MessageCellStyle-Send"]["-ios-selected-background-image"]
+              }
+            />
             <div className="absolute top-0 bottom-0 flex items-center justify-center">
               <SpeechBubble direction="left" className="absolute top-1 -right-42">
-                8
+                7
               </SpeechBubble>
             </div>
           </div>
         }
       />
+
+      {/* 보낸 메시지 두번째 */}
       <div className="my-1.5" />
-      <SentMessage
+      <Message
         message="어피치어피치한"
         time="오후12:03"
+        isReceived={false}
+        TextColor={
+          isActive["MessageCellStyle-Send"]["-ios-text-color"]
+            ? messageCell["MessageCellStyle-Send"]["-ios-text-color"]
+            : messageCell["MessageCellStyle-Send"]["-ios-selected-text-color"]
+        }
+        Image={
+          isActive["MessageCellStyle-Send"]["-ios-group-background-image"]
+            ? messageCell["MessageCellStyle-Send"]["-ios-group-background-image"]
+            : messageCell["MessageCellStyle-Send"]["-ios-group-selected-background-image"]
+        }
         children={
           <>
             <SpeechBubble direction="bottom" className="absolute -top-4 right-10">
-              6
+              5
             </SpeechBubble>
             <SpeechBubble direction="left" className="absolute top-1 -right-6">
-              7
+              6
             </SpeechBubble>
           </>
         }
         chatList={
           <div className="relative flex items-end gap-0.5">
             <div className="flex flex-col items-end">
-              <div className="text-[7px] xl-text-[8px] text-red-500">1</div>
+              <div
+                className="text-[7px] xl-text-[8px] text-red-500"
+                style={{
+                  color: messageCell["MessageCellStyle-Send"]["-ios-unread-text-color"],
+                }}
+              >
+                1
+              </div>
               <div className="text-[7px] xl:text-[8px]">오후12:03</div>
             </div>
-            <ChatBubble message="채팅내용 입력하기" isReceived={false} />
+            <ChatBubble
+              message="채팅내용 입력하기"
+              isReceived={false}
+              TextColor={
+                isActive["MessageCellStyle-Send"]["-ios-text-color"]
+                  ? messageCell["MessageCellStyle-Send"]["-ios-text-color"]
+                  : messageCell["MessageCellStyle-Send"]["-ios-selected-text-color"]
+              }
+              Image={
+                isActive["MessageCellStyle-Send"]["-ios-group-background-image"]
+                  ? messageCell["MessageCellStyle-Send"]["-ios-group-background-image"]
+                  : messageCell["MessageCellStyle-Send"]["-ios-group-selected-background-image"]
+              }
+            />
             <div className="absolute top-0 bottom-0 flex items-center justify-center">
               <SpeechBubble direction="left" className="absolute top-1 -right-42">
-                8
+                7
               </SpeechBubble>
             </div>
             <div className="absolute top-0 bottom-0 left-0 flex items-center justify-center">
               <SpeechBubble direction="right" className="absolute top-0 left-0">
-                9
+                8
               </SpeechBubble>
             </div>
           </div>

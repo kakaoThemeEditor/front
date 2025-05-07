@@ -1,18 +1,18 @@
-import { ThemeValues } from "./type";
+import { PasscodeTheme } from "./type";
 import { IoBackspaceOutline } from "react-icons/io5";
-import SpeechBubble from "../../button/SpeechBubble";
-import CircleButton from "../../button/CircleButton";
+import SpeechBubble from "@/components/button/SpeechBubble";
+import CircleButton from "@/components/button/CircleButton";
 
 interface PassCodeKeypadProps {
-  themeValues: ThemeValues;
+  passcode: PasscodeTheme;
 }
 
-export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
+export function PassCodeKeypad({ passcode }: PassCodeKeypadProps) {
   return (
     <div
       className="relative h-2/5 w-full"
       style={{
-        backgroundColor: themeValues["BulletStyle-Passcode"]["-ios-keypad-background-color"],
+        backgroundColor: passcode["BulletStyle-Passcode"]["-ios-keypad-background-color"],
       }}
     >
       <div className="relative h-full w-full border-3 border-kakao-blue rounded-2xl p-3 grid grid-cols-3 gap-2 place-items-center">
@@ -22,7 +22,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
         <div
           className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
-            color: themeValues["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
+            color: passcode["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
           }}
         >
           1
@@ -30,7 +30,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
         <div
           className="relative flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
-            color: themeValues["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
+            color: passcode["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
           }}
         >
           2
@@ -41,7 +41,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
         <div
           className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
-            color: themeValues["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
+            color: passcode["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
           }}
         >
           3
@@ -49,7 +49,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
         <div
           className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
-            color: themeValues["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
+            color: passcode["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
           }}
         >
           4
@@ -58,13 +58,13 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
         <div
           className="relative flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
-            backgroundImage: `url(${themeValues["BulletStyle-Passcode"]["-ios-keypad-number-highlighted-image"]})`,
+            backgroundImage: `url(${passcode["BulletStyle-Passcode"]["-ios-keypad-number-highlighted-image"]})`,
             backgroundSize: "contain",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             width: "60px",
             height: "60px",
-            color: themeValues["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
+            color: passcode["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
           }}
         >
           5
@@ -75,7 +75,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
         <div
           className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
-            color: themeValues["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
+            color: passcode["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
           }}
         >
           6
@@ -83,7 +83,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
         <div
           className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
-            color: themeValues["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
+            color: passcode["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
           }}
         >
           7
@@ -91,7 +91,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
         <div
           className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
-            color: themeValues["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
+            color: passcode["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
           }}
         >
           8
@@ -99,7 +99,7 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
         <div
           className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
-            color: themeValues["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
+            color: passcode["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
           }}
         >
           9
@@ -107,13 +107,13 @@ export function PassCodeKeypad({ themeValues }: PassCodeKeypadProps) {
         <div
           className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
-            color: themeValues["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
+            color: passcode["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
           }}
         ></div>
         <div
           className="flex flex-col justify-center items-center font-bold text-base xl:text-lg"
           style={{
-            color: themeValues["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
+            color: passcode["BulletStyle-Passcode"]["-ios-keypad-text-normal-color"],
           }}
         >
           0

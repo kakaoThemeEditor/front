@@ -1,48 +1,47 @@
-import { ColorInput } from "../common/ColorInput";
-import { SectionHeader } from "../common/SectionHeader";
-import { EditTableRow } from "../common/EditTableRow";
-import ImageFileButton from "../button/ImageFileButton";
+import { ColorInput } from "../../input/ColorInput";
+import { SectionHeader } from "../table/SectionHeader";
+import { EditTableRow } from "../table/EditTableRow";
+import ImageFileButton from "../../input/ImageFileButton";
 import { RotateCw } from "lucide-react";
-import EditTableInnerRow from "../common/EditTableInnerRow";
-import { IsActive, ThemeValues } from "../kakaoScreens/tabbar/type";
-import { EditTableInnerRowTextCell } from "../common/EditTableInnerRowTextCell";
+import EditTableInnerRow from "../table/EditTableInnerRow";
+import { IsActive, TabbarTheme } from "./type";
+import { EditTableInnerRowTextCell } from "../table/EditTableInnerRowTextCell";
+import { useThemeStore } from "@/store/themeStore";
 
 export function TabBarEditTable({
-  themeValues,
-  setThemeValues,
   isActive,
   setIsActive,
 }: {
-  themeValues: ThemeValues;
-  setThemeValues: React.Dispatch<React.SetStateAction<ThemeValues>>;
   isActive: IsActive;
-  setIsActive: React.Dispatch<React.SetStateAction<IsActive>>;
+  setIsActive: (isActive: IsActive) => void;
 }) {
+  const { tabbar, setTabbar } = useThemeStore();
+
   const handleChange = (
-    key: keyof ThemeValues,
+    key: keyof TabbarTheme,
     subKey:
-      | keyof ThemeValues["TabbarStyle-Main"]
-      | keyof ThemeValues["DefaultProfileStyle"]
-      | keyof ThemeValues["FeatureStyle-Primary"],
+      | keyof TabbarTheme["TabbarStyle-Main"]
+      | keyof TabbarTheme["DefaultProfileStyle"]
+      | keyof TabbarTheme["FeatureStyle-Primary"],
     value: string | File
   ) => {
-    setThemeValues((prev) => ({
-      ...prev,
+    setTabbar({
+      ...tabbar,
       [key]: {
-        ...prev[key],
+        ...tabbar[key],
         [subKey]: value,
       },
-    }));
+    });
   };
 
   const handleActive = (key: keyof IsActive, subKey: keyof IsActive["TabbarStyle-Main"], value: boolean) => {
-    setIsActive((prev) => ({
-      ...prev,
+    setIsActive({
+      ...isActive,
       [key]: {
-        ...prev[key],
+        ...isActive[key],
         [subKey]: value,
       },
-    }));
+    });
   };
 
   return (
@@ -58,8 +57,8 @@ export function TabBarEditTable({
         <EditTableInnerRow>
           <div className="px-2 py-1">메인탭 배경 컬러</div>
           <ColorInput
-            value={themeValues["TabbarStyle-Main"]["background-color"]}
-            onChange={(value) => handleChange("TabbarStyle-Main", "-ios-background-image", value)}
+            value={tabbar["TabbarStyle-Main"]["background-color"]}
+            onChange={(value) => handleChange("TabbarStyle-Main", "background-color", value)}
           />
           <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">
             <RotateCw className="w-5 h-5" />
@@ -86,7 +85,7 @@ export function TabBarEditTable({
             onClick={() => handleActive("TabbarStyle-Main", "-ios-friends-normal-icon-image", false)}
           />
           <ImageFileButton
-            onImageUpload={(file) => handleChange("TabbarStyle-Main", "-ios-friends-normal-icon-image", file)}
+            onImageUpload={(file) => handleChange("TabbarStyle-Main", "-ios-friends-selected-icon-image", file)}
           />
         </EditTableInnerRow>
       </EditTableRow>
@@ -109,7 +108,7 @@ export function TabBarEditTable({
             onClick={() => handleActive("TabbarStyle-Main", "-ios-chats-normal-icon-image", false)}
           />
           <ImageFileButton
-            onImageUpload={(file) => handleChange("TabbarStyle-Main", "-ios-chats-normal-icon-image", file)}
+            onImageUpload={(file) => handleChange("TabbarStyle-Main", "-ios-chats-selected-icon-image", file)}
           />
         </EditTableInnerRow>
       </EditTableRow>
@@ -132,7 +131,7 @@ export function TabBarEditTable({
             onClick={() => handleActive("TabbarStyle-Main", "-ios-openchats-normal-icon-image", false)}
           />
           <ImageFileButton
-            onImageUpload={(file) => handleChange("TabbarStyle-Main", "-ios-openchats-normal-icon-image", file)}
+            onImageUpload={(file) => handleChange("TabbarStyle-Main", "-ios-openchats-selected-icon-image", file)}
           />
         </EditTableInnerRow>
       </EditTableRow>
@@ -155,7 +154,7 @@ export function TabBarEditTable({
             onClick={() => handleActive("TabbarStyle-Main", "-ios-shopping-normal-icon-image", false)}
           />
           <ImageFileButton
-            onImageUpload={(file) => handleChange("TabbarStyle-Main", "-ios-shopping-normal-icon-image", file)}
+            onImageUpload={(file) => handleChange("TabbarStyle-Main", "-ios-shopping-selected-icon-image", file)}
           />
         </EditTableInnerRow>
       </EditTableRow>
@@ -178,7 +177,7 @@ export function TabBarEditTable({
             onClick={() => handleActive("TabbarStyle-Main", "-ios-more-normal-icon-image", false)}
           />
           <ImageFileButton
-            onImageUpload={(file) => handleChange("TabbarStyle-Main", "-ios-more-normal-icon-image", file)}
+            onImageUpload={(file) => handleChange("TabbarStyle-Main", "-ios-more-selected-icon-image", file)}
           />
         </EditTableInnerRow>
       </EditTableRow>
@@ -201,7 +200,7 @@ export function TabBarEditTable({
           <EditTableInnerRow>
             <div className="px-2 py-1">서비스 버튼 컬러</div>
             <ColorInput
-              value={themeValues["FeatureStyle-Primary"]["-ios-text-color"]}
+              value={tabbar["FeatureStyle-Primary"]["-ios-text-color"]}
               onChange={(value) => handleChange("FeatureStyle-Primary", "-ios-text-color", value)}
             />
           </EditTableInnerRow>

@@ -1,7 +1,73 @@
-import { PreviewProfile } from "@/components/common/PreviewProfile";
+import { PreviewProfile } from "@/components/kakaoScreens/preview/PreviewProfile";
 import CircleButton from "@/components/button/CircleButton";
 import SpeechBubble from "@/components/button/SpeechBubble";
-import { MainViewStyle1Theme } from "./type";
+import { useThemeStore } from "@/store/themeStore";
+import { getOpacity } from "@/utils/utils";
+
+export function MV1ChatList() {
+  const { mv1Theme } = useThemeStore();
+
+  return (
+    <>
+      <ChatItem />
+      <div
+        className={`relative flex justify-between w-full px-4 py-2 rounded-lg border-2  border-kakao-blue `}
+        style={{
+          backgroundColor: mv1Theme["MainViewStyle-Primary"]["-ios-normal-background-color"],
+          opacity: `${getOpacity(mv1Theme["MainViewStyle-Primary"]["-ios-normal-background-alpha"])}`,
+        }}
+      >
+        <CircleButton Number={3} className="absolute -top-2.5 xl:-top-2.5 right-12.5 xl:right-14" />
+        <PreviewProfile
+          name="어피치"
+          description="오늘 장보기 목록"
+          size="md"
+          avartarRounded="rounded-lg"
+          descriptionColor={mv1Theme["MainViewStyle-Primary"]["-ios-paragraph-text-color"]}
+        >
+          <SpeechBubble direction="left" className="absolute top-1/2 -right-8.5">
+            2
+          </SpeechBubble>
+        </PreviewProfile>
+
+        <div className="flex flex-col items-end gap-1">
+          <div className="text-[8px] xl:text-[10px]">오후 5:11</div>
+        </div>
+      </div>
+      <ChatItem />
+
+      <div
+        className={`relative flex justify-between w-full px-4 py-2 rounded-lg bg-black/10 border-2  border-kakao-blue`}
+        style={{
+          backgroundColor: mv1Theme["MainViewStyle-Primary"]["-ios-selected-background-color"],
+          opacity: `${getOpacity(mv1Theme["MainViewStyle-Primary"]["-ios-selected-background-alpha"])}`,
+        }}
+      >
+        <CircleButton Number={4} className="absolute -top-2.5 xl:-top-2.5 right-12.5 xl:right-14" />
+
+        <PreviewProfile
+          name="어피치"
+          description="오늘 장보기 목록"
+          size="md"
+          avartarRounded="rounded-lg"
+          // -ios-paragraph-highlighted-text-color: "#946c6c"
+          descriptionColor={mv1Theme["MainViewStyle-Primary"]["-ios-paragraph-highlighted-text-color"]}
+        >
+          <SpeechBubble direction="left" className="absolute top-1/2 -right-8.5">
+            2
+          </SpeechBubble>
+        </PreviewProfile>
+
+        <div className="flex flex-col items-end gap-1">
+          <div className="text-[8px] xl:text-[10px]">오후 5:11</div>
+          <div className="text-white text-[8px] xl:text-[10px] bg-red-500/70 rounded-full px-1 xl:px-1.5"></div>
+        </div>
+      </div>
+
+      <ChatItem hasNotification notificationCount={18} />
+    </>
+  );
+}
 
 interface ChatItemProps {
   isActive?: boolean;
@@ -33,68 +99,5 @@ function ChatItem({ isActive, hasNotification, notificationCount, isBorder }: Ch
         )}
       </div>
     </div>
-  );
-}
-
-export function MV1ChatList({ themeValues }: { themeValues: MainViewStyle1Theme }) {
-  return (
-    <>
-      <ChatItem />
-
-      <div
-        className={`relative flex justify-between w-full px-4 py-2 rounded-lg border-2  border-kakao-blue `}
-        style={{
-          backgroundColor: themeValues["MainViewStyle-Primary"]["-ios-normal-background-color"],
-          opacity: themeValues["MainViewStyle-Primary"]["-ios-normal-background-alpha"],
-        }}
-      >
-        <CircleButton Number={3} className="absolute -top-2.5 xl:-top-2.5 right-12.5 xl:right-14" />
-        <PreviewProfile
-          name="어피치"
-          description="오늘 장보기 목록"
-          size="md"
-          avartarRounded="rounded-lg"
-          descriptionColor={themeValues["MainViewStyle-Primary"]["-ios-paragraph-text-color"]}
-        >
-          <SpeechBubble direction="left" className="absolute top-1/2 -right-8.5">
-            2
-          </SpeechBubble>
-        </PreviewProfile>
-
-        <div className="flex flex-col items-end gap-1">
-          <div className="text-[8px] xl:text-[10px]">오후 5:11</div>
-        </div>
-      </div>
-      <ChatItem />
-
-      <div
-        className={`relative flex justify-between w-full px-4 py-2 rounded-lg bg-black/10 border-2  border-kakao-blue`}
-        style={{
-          backgroundColor: themeValues["MainViewStyle-Primary"]["-ios-selected-background-color"],
-          opacity: themeValues["MainViewStyle-Primary"]["-ios-selected-background-alpha"],
-        }}
-      >
-        <CircleButton Number={4} className="absolute -top-2.5 xl:-top-2.5 right-12.5 xl:right-14" />
-
-        <PreviewProfile
-          name="어피치"
-          description="오늘 장보기 목록"
-          size="md"
-          avartarRounded="rounded-lg"
-          descriptionColor={themeValues["MainViewStyle-Primary"]["-ios-paragraph-highlighted-text-color"]}
-        >
-          <SpeechBubble direction="left" className="absolute top-1/2 -right-8.5">
-            2
-          </SpeechBubble>
-        </PreviewProfile>
-
-        <div className="flex flex-col items-end gap-1">
-          <div className="text-[8px] xl:text-[10px]">오후 5:11</div>
-          <div className="text-white text-[8px] xl:text-[10px] bg-red-500/70 rounded-full px-1 xl:px-1.5"></div>
-        </div>
-      </div>
-
-      <ChatItem hasNotification notificationCount={18} />
-    </>
   );
 }

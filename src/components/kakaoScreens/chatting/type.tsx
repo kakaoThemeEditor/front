@@ -22,3 +22,16 @@ export interface MessageCellStyleType {
     "-ios-unread-text-color": string;
   };
 }
+
+export interface isActiveType {
+  "MessageCellStyle-Send": {
+    "-ios-background-image": boolean;
+    "-ios-group-background-image": boolean;
+    "-ios-text-color": boolean;
+  };
+  "MessageCellStyle-Receive": {
+    "-ios-background-image": boolean;
+    "-ios-group-background-image": boolean;
+    "-ios-text-color": boolean;
+  };
+}
