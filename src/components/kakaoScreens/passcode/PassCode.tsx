@@ -1,53 +1,49 @@
 import { useState } from "react";
 import { PassCodePreview } from "./PassCodePreview";
 import { PassCodeEditor } from "./PassCodeEditor";
-
-export interface ThemeValues {
-  backgroundColor: string;
-  iosBackgroundImage: string;
-  iosTextColor: string;
-  iosBulletFirstImage: string;
-  iosBulletSecondImage: string;
-  iosBulletThirdImage: string;
-  iosBulletFourthImage: string;
-  iosBulletSelectedFirstImage: string;
-  iosBulletSelectedSecondImage: string;
-  iosBulletSelectedThirdImage: string;
-  iosBulletSelectedFourthImage: string;
-  iosKeypadBackgroundColor: string;
-  iosKeypadTextNormalColor: string;
-  iosKeypadNumberHighlightedImage: string;
-}
+import { KakaoScreenLayout } from "@/components/common/KakaoScreenLayout";
+import { KakaoPhoneFrame } from "@/components/common/KakaoPhoneFrame";
+import { ThemeValues } from "./type";
 
 export default function PassCode() {
   const [themeValues, setThemeValues] = useState<ThemeValues>({
-    backgroundColor: "",
-    iosBackgroundImage: "",
-    iosTextColor: "",
-    iosBulletFirstImage: "",
-    iosBulletSecondImage: "",
-    iosBulletThirdImage: "",
-    iosBulletFourthImage: "",
-    iosBulletSelectedFirstImage: "",
-    iosBulletSelectedSecondImage: "",
-    iosBulletSelectedThirdImage: "",
-    iosBulletSelectedFourthImage: "",
-    iosKeypadBackgroundColor: "",
-    iosKeypadTextNormalColor: "",
-    iosKeypadNumberHighlightedImage: "",
+    "BackgroundStyle-Passcode": {
+      "background-color": "",
+      "-ios-background-image": "",
+    },
+    "LabelStyle-PasscodeTitle": {
+      "-ios-text-color": "",
+    },
+    "BulletStyle-Passcode": {
+      "-ios-bullet-first-image": "",
+      "-ios-bullet-second-image": "",
+      "-ios-bullet-third-image": "",
+      "-ios-bullet-fourth-image": "",
+      "-ios-bullet-selected-first-image": "",
+      "-ios-bullet-selected-second-image": "",
+      "-ios-bullet-selected-third-image": "",
+      "-ios-bullet-selected-fourth-image": "",
+      "-ios-keypad-background-color": "",
+      "-ios-keypad-text-normal-color": "",
+      "-ios-keypad-number-highlighted-image": "",
+    },
   });
 
   const [activeSelected, setActiveSelected] = useState<boolean>(false);
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] w-full h-full xl:h-[calc(100vh-36px)] ">
-      <PassCodePreview themeValues={themeValues} activeSelected={activeSelected} />
-      <PassCodeEditor
-        themeValues={themeValues}
-        setThemeValues={setThemeValues}
-        activeSelected={activeSelected}
-        setActiveSelected={setActiveSelected}
+    <>
+      <KakaoScreenLayout
+        editor={
+          <PassCodeEditor
+            themeValues={themeValues}
+            setThemeValues={setThemeValues}
+            activeSelected={activeSelected}
+            setActiveSelected={setActiveSelected}
+          />
+        }
+        preview={<PassCodePreview themeValues={themeValues} activeSelected={activeSelected} />}
       />
-    </div>
+    </>
   );
 }

@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { ThemeStyleDropDown } from "@/components/dropdown-menu/ThemeStyleDropDown";
 import { TabBarEditTable } from "@/components/table/TabBarEditTable";
-import { ThemeValues } from "./TabBar";
+import { ThemeValues, IsActive } from "./type";
 
 interface TabBarEditorProps {
   themeValues: ThemeValues;
   setThemeValues: React.Dispatch<React.SetStateAction<ThemeValues>>;
-  isActive: { [key: string]: boolean };
-  setIsActive: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>;
+  isActive: IsActive;
+  setIsActive: React.Dispatch<React.SetStateAction<IsActive>>;
 }
 
 export function TabBarEditor({ themeValues, setThemeValues, isActive, setIsActive }: TabBarEditorProps) {

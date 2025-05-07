@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ThemeStyleDropDown } from "@/components/dropdown-menu/ThemeStyleDropDown";
-import { ThemeValues } from "./MainviewStyle2";
+import { MainViewStyle2Theme } from "./type";
 import { MV2EditorTable } from "@/components/table/MV2EditorTable";
 
 interface MV2EditorProps {
-  themeValues: ThemeValues;
-  setThemeValues: React.Dispatch<React.SetStateAction<ThemeValues>>;
+  themeValues: MainViewStyle2Theme;
+  setThemeValues: React.Dispatch<React.SetStateAction<MainViewStyle2Theme>>;
   isActive: { [key: string]: boolean };
   setIsActive: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>;
 }

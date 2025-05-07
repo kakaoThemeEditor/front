@@ -1,4 +1,4 @@
-import { ThemeValues } from "./PassCode";
+import { ThemeValues } from "./type";
 import { Button } from "../../ui/button";
 import { ThemeStyleDropDown } from "../../dropdown-menu/ThemeStyleDropDown";
 import { PassCodeEditTable } from "../../table/PassCodeEditTable";
@@ -17,7 +17,7 @@ export function PassCodeEditor({
   setActiveSelected,
 }: PassCodeEditorProps) {
   return (
-    <div className="w-full xl:w-11/12  p-6 bg-white  overflow-auto mx-auto">
+    <div className="w-full xl:w-11/12  p-6 overflow-auto mx-auto">
       <div className="flex justify-between mb-4 w-full ">
         <ThemeStyleDropDown />
         <Button size="sm" className="text-xs">

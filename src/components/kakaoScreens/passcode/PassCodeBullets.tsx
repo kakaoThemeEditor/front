@@ -1,4 +1,4 @@
-import { ThemeValues } from "./PassCode";
+import { ThemeValues } from "./type";
 import SpeechBubble from "../../button/SpeechBubble";
 import clsx from "clsx";
 
@@ -9,23 +9,25 @@ interface PassCodeBulletsProps {
 
 export function PassCodeBullets({ themeValues, activeSelected }: PassCodeBulletsProps) {
   console.log(
-    activeSelected && !!themeValues.iosBulletSelectedFirstImage,
-    !activeSelected && !!themeValues.iosBulletFirstImage
+    activeSelected && !!themeValues["BulletStyle-Passcode"]["-ios-bullet-selected-first-image"],
+    !activeSelected && !!themeValues["BulletStyle-Passcode"]["-ios-bullet-first-image"]
   );
   return (
     <div className="flex gap-2">
       <div
         className={clsx(
           "relative w-7 h-7  ",
-          activeSelected && !!themeValues.iosBulletSelectedFirstImage
+          activeSelected && !!themeValues["BulletStyle-Passcode"]["-ios-bullet-selected-first-image"]
             ? ""
-            : !activeSelected && !!themeValues.iosBulletFirstImage
+            : !activeSelected && !!themeValues["BulletStyle-Passcode"]["-ios-bullet-first-image"]
             ? ""
             : "bg-gray-200 rounded-full"
         )}
         style={{
           backgroundImage: `url(${
-            activeSelected ? themeValues.iosBulletSelectedFirstImage : themeValues.iosBulletFirstImage
+            activeSelected
+              ? themeValues["BulletStyle-Passcode"]["-ios-bullet-selected-first-image"]
+              : themeValues["BulletStyle-Passcode"]["-ios-bullet-first-image"]
           })`,
 
           backgroundSize: "cover",
@@ -40,15 +42,17 @@ export function PassCodeBullets({ themeValues, activeSelected }: PassCodeBullets
       <div
         className={clsx(
           "relative w-7 h-7  ",
-          activeSelected && !!themeValues.iosBulletSelectedSecondImage
+          activeSelected && !!themeValues["BulletStyle-Passcode"]["-ios-bullet-selected-second-image"]
             ? ""
-            : !activeSelected && !!themeValues.iosBulletSecondImage
+            : !activeSelected && !!themeValues["BulletStyle-Passcode"]["-ios-bullet-second-image"]
             ? ""
             : "bg-gray-200 rounded-full"
         )}
         style={{
           backgroundImage: `url(${
-            activeSelected ? themeValues.iosBulletSelectedSecondImage : themeValues.iosBulletSecondImage
+            activeSelected
+              ? themeValues["BulletStyle-Passcode"]["-ios-bullet-selected-second-image"]
+              : themeValues["BulletStyle-Passcode"]["-ios-bullet-second-image"]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -57,15 +61,17 @@ export function PassCodeBullets({ themeValues, activeSelected }: PassCodeBullets
       <div
         className={clsx(
           "relative w-7 h-7  ",
-          activeSelected && !!themeValues.iosBulletSelectedThirdImage
+          activeSelected && !!themeValues["BulletStyle-Passcode"]["-ios-bullet-selected-third-image"]
             ? ""
-            : !activeSelected && !!themeValues.iosBulletThirdImage
+            : !activeSelected && !!themeValues["BulletStyle-Passcode"]["-ios-bullet-third-image"]
             ? ""
             : "bg-gray-200 rounded-full"
         )}
         style={{
           backgroundImage: `url(${
-            activeSelected ? themeValues.iosBulletSelectedThirdImage : themeValues.iosBulletThirdImage
+            activeSelected
+              ? themeValues["BulletStyle-Passcode"]["-ios-bullet-selected-third-image"]
+              : themeValues["BulletStyle-Passcode"]["-ios-bullet-third-image"]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -78,15 +84,17 @@ export function PassCodeBullets({ themeValues, activeSelected }: PassCodeBullets
       <div
         className={clsx(
           "relative w-7 h-7  ",
-          activeSelected && !!themeValues.iosBulletSelectedFourthImage
+          activeSelected && !!themeValues["BulletStyle-Passcode"]["-ios-bullet-selected-fourth-image"]
             ? ""
-            : !activeSelected && !!themeValues.iosBulletFourthImage
+            : !activeSelected && !!themeValues["BulletStyle-Passcode"]["-ios-bullet-fourth-image"]
             ? ""
             : "bg-gray-200 rounded-full"
         )}
         style={{
           backgroundImage: `url(${
-            activeSelected ? themeValues.iosBulletSelectedFourthImage : themeValues.iosBulletFourthImage
+            activeSelected
+              ? themeValues["BulletStyle-Passcode"]["-ios-bullet-selected-fourth-image"]
+              : themeValues["BulletStyle-Passcode"]["-ios-bullet-fourth-image"]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",

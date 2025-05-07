@@ -1,7 +1,7 @@
 import MaintabBgImage from "../../../assets/Images/maintabBgImage@2x.png";
 import SpeechBubble from "../../button/SpeechBubble";
 import CircleButton from "../../button/CircleButton";
-import { ThemeValues } from "./TabBar";
+import { ThemeValues, IsActive } from "./type";
 import clsx from "clsx";
 
 export function TabBarBottom({
@@ -12,15 +12,17 @@ export function TabBarBottom({
 }: {
   themeValues: ThemeValues;
   setThemeValues: (themeValues: ThemeValues) => void;
-  isActive: { [key: string]: boolean };
-  setIsActive: (isActive: { [key: string]: boolean }) => void;
+  isActive: IsActive;
+  setIsActive: (isActive: IsActive) => void;
 }) {
   return (
     <div
       className="relative flex h-16 xl:h-18 p-3 xl:p-4 justify-between mt-auto rounded-b-2xl"
       style={{
-        backgroundColor: themeValues.iosBackgroundImage ? "transparent" : themeValues.backgroundColor,
-        backgroundImage: `url(${themeValues.iosBackgroundImage})`,
+        backgroundColor: themeValues["TabbarStyle-Main"]["-ios-background-image"]
+          ? "transparent"
+          : themeValues["TabbarStyle-Main"]["background-color"],
+        backgroundImage: `url(${themeValues["TabbarStyle-Main"]["-ios-background-image"]})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -33,17 +35,19 @@ export function TabBarBottom({
       <div
         className={clsx(
           "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
-          !!isActive.iosChatsNormalIconImage && !!themeValues.iosChatsNormalIconImage
+          !!isActive["TabbarStyle-Main"]["-ios-friends-normal-icon-image"] &&
+            !!themeValues["TabbarStyle-Main"]["-ios-friends-normal-icon-image"]
             ? ""
-            : !!!isActive.iosChatsNormalIconImage && !!themeValues.iosChatsSelectedIconImage
+            : !!!isActive["TabbarStyle-Main"]["-ios-friends-normal-icon-image"] &&
+              !!themeValues["TabbarStyle-Main"]["-ios-friends-selected-icon-image"]
             ? ""
             : "bg-gray-200"
         )}
         style={{
           backgroundImage: `url(${
-            !!isActive.iosChatsNormalIconImage
-              ? themeValues.iosChatsNormalIconImage
-              : themeValues.iosChatsSelectedIconImage
+            !!isActive["TabbarStyle-Main"]["-ios-friends-normal-icon-image"]
+              ? themeValues["TabbarStyle-Main"]["-ios-friends-normal-icon-image"]
+              : themeValues["TabbarStyle-Main"]["-ios-friends-selected-icon-image"]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -58,17 +62,19 @@ export function TabBarBottom({
       <div
         className={clsx(
           "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
-          !!isActive.iosChatsNormalIconImage && !!themeValues.iosChatsNormalIconImage
+          !!isActive["TabbarStyle-Main"]["-ios-chats-normal-icon-image"] &&
+            !!themeValues["TabbarStyle-Main"]["-ios-chats-normal-icon-image"]
             ? ""
-            : !!!isActive.iosChatsNormalIconImage && !!themeValues.iosChatsSelectedIconImage
+            : !!!isActive["TabbarStyle-Main"]["-ios-chats-normal-icon-image"] &&
+              !!themeValues["TabbarStyle-Main"]["-ios-chats-selected-icon-image"]
             ? ""
             : "bg-gray-200"
         )}
         style={{
           backgroundImage: `url(${
-            !!isActive.iosChatsNormalIconImage
-              ? themeValues.iosChatsNormalIconImage
-              : themeValues.iosChatsSelectedIconImage
+            !!isActive["TabbarStyle-Main"]["-ios-chats-normal-icon-image"]
+              ? themeValues["TabbarStyle-Main"]["-ios-chats-normal-icon-image"]
+              : themeValues["TabbarStyle-Main"]["-ios-chats-selected-icon-image"]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -83,17 +89,19 @@ export function TabBarBottom({
       <div
         className={clsx(
           "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
-          !!isActive.iosOpenchatsNormalIconImage && !!themeValues.iosOpenchatsNormalIconImage
+          !!isActive["TabbarStyle-Main"]["-ios-openchats-normal-icon-image"] &&
+            !!themeValues["TabbarStyle-Main"]["-ios-openchats-normal-icon-image"]
             ? ""
-            : !!!isActive.iosOpenchatsNormalIconImage && !!themeValues.iosOpenchatsSelectedIconImage
+            : !!!isActive["TabbarStyle-Main"]["-ios-openchats-normal-icon-image"] &&
+              !!themeValues["TabbarStyle-Main"]["-ios-openchats-selected-icon-image"]
             ? ""
             : "bg-gray-200"
         )}
         style={{
           backgroundImage: `url(${
-            !!isActive.iosOpenchatsNormalIconImage
-              ? themeValues.iosOpenchatsNormalIconImage
-              : themeValues.iosOpenchatsSelectedIconImage
+            !!isActive["TabbarStyle-Main"]["-ios-openchats-normal-icon-image"]
+              ? themeValues["TabbarStyle-Main"]["-ios-openchats-normal-icon-image"]
+              : themeValues["TabbarStyle-Main"]["-ios-openchats-selected-icon-image"]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -108,17 +116,19 @@ export function TabBarBottom({
       <div
         className={clsx(
           "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
-          !!isActive.iosShoppingNormalIconImage && !!themeValues.iosShoppingNormalIconImage
+          !!isActive["TabbarStyle-Main"]["-ios-shopping-normal-icon-image"] &&
+            !!themeValues["TabbarStyle-Main"]["-ios-shopping-normal-icon-image"]
             ? ""
-            : !!!isActive.iosShoppingNormalIconImage && !!themeValues.iosShoppingSelectedIconImage
+            : !!!isActive["TabbarStyle-Main"]["-ios-shopping-normal-icon-image"] &&
+              !!themeValues["TabbarStyle-Main"]["-ios-shopping-selected-icon-image"]
             ? ""
             : "bg-gray-200"
         )}
         style={{
           backgroundImage: `url(${
-            !!isActive.iosShoppingNormalIconImage
-              ? themeValues.iosShoppingNormalIconImage
-              : themeValues.iosShoppingSelectedIconImage
+            !!isActive["TabbarStyle-Main"]["-ios-shopping-normal-icon-image"]
+              ? themeValues["TabbarStyle-Main"]["-ios-shopping-normal-icon-image"]
+              : themeValues["TabbarStyle-Main"]["-ios-shopping-selected-icon-image"]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -133,17 +143,19 @@ export function TabBarBottom({
       <div
         className={clsx(
           "relative w-8 h-8 xl:w-9 xl:h-9  rounded-full",
-          !!isActive.iosMoreNormalIconImage && !!themeValues.iosMoreNormalIconImage
+          !!isActive["TabbarStyle-Main"]["-ios-more-normal-icon-image"] &&
+            !!themeValues["TabbarStyle-Main"]["-ios-more-normal-icon-image"]
             ? ""
-            : !!!isActive.iosMoreNormalIconImage && !!themeValues.iosMoreSelectedIconImage
+            : !!!isActive["TabbarStyle-Main"]["-ios-more-normal-icon-image"] &&
+              !!themeValues["TabbarStyle-Main"]["-ios-more-selected-icon-image"]
             ? ""
             : "bg-gray-200"
         )}
         style={{
           backgroundImage: `url(${
-            !!isActive.iosMoreNormalIconImage
-              ? themeValues.iosMoreNormalIconImage
-              : themeValues.iosMoreSelectedIconImage
+            !!isActive["TabbarStyle-Main"]["-ios-more-normal-icon-image"]
+              ? themeValues["TabbarStyle-Main"]["-ios-more-normal-icon-image"]
+              : themeValues["TabbarStyle-Main"]["-ios-more-selected-icon-image"]
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",

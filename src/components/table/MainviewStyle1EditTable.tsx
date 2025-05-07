@@ -1,54 +1,115 @@
-import CircleButton from "../button/CircleButton";
-import { Input } from "../ui/input";
+import { ColorInput } from "../common/ColorInput";
+import { SectionHeader } from "../common/SectionHeader";
+import { EditTableRow } from "../common/EditTableRow";
+import EditTableInnerRow from "../common/EditTableInnerRow";
+import { MainViewStyle1Theme } from "../kakaoScreens/MainViewStyle1/type";
+import { AlphaInput } from "../common/AlphaInput";
+import { RotateCw } from "lucide-react";
 
-interface ThemeValues {
-  iosTextColor: string;
+interface MainviewStyle1EditTableProps {
+  themeValues: MainViewStyle1Theme;
+  setThemeValues: React.Dispatch<React.SetStateAction<MainViewStyle1Theme>>;
 }
 
-export default function MainviewStyle1EditTable({
-  themeValues,
-  setThemeValues,
-}: {
-  themeValues: ThemeValues;
-  setThemeValues: React.Dispatch<React.SetStateAction<ThemeValues>>;
-}) {
-  const handleChange = (key: keyof typeof themeValues, value: string) => {
+export default function MainviewStyle1EditTable({ themeValues, setThemeValues }: MainviewStyle1EditTableProps) {
+  const handleChange = (
+    key: keyof MainViewStyle1Theme,
+    subKey: keyof MainViewStyle1Theme["HeaderStyle-Main"] | keyof MainViewStyle1Theme["MainViewStyle-Primary"],
+    value: string | number
+  ) => {
     setThemeValues((prev) => ({
       ...prev,
-      [key]: value,
+      [key]: {
+        ...prev[key],
+        [subKey]: value,
+      },
     }));
   };
+
   return (
     <div className="w-full text-[10px] xl:text-xs text-left">
-      <div className="bg-gray-100 border-t border-t-gray-200 border-b border-b-gray-900 py-1.5 grid grid-cols-2 items-center">
-        <div className="px-2 py-1 text-xs font-bold">TabBarStyle-Main</div>
-        <div className="px-2 py-1 text-xs font-bold">메인탭 스타일</div>
-      </div>
+      <SectionHeader title="Header" subtitle="헤더 스타일" />
 
-      <div className="flex items-center mb-6">
-        <div className="px-1">
-          <CircleButton Number={1} className="text-xs" />
-        </div>
-        <div className="flex-1">
-          <div className="grid grid-cols-2 items-center">
-            <div className="px-2 py-1">메인탭 배경 컬러</div>
-            <div className="flex items-center gap-2">
-              <Input
-                type="text"
-                placeholder="#FFFFFF"
-                className="border-none focus-visible:ring-0"
-                value={themeValues.iosTextColor}
-                onChange={(e) => handleChange("iosTextColor", e.target.value)}
-              />
-              <input
-                type="color"
-                className="w-10 h-10 p-0 appearance-none border-2 border-white cursor-pointer"
-                value={themeValues.iosTextColor}
-                onChange={(e) => handleChange("iosTextColor", e.target.value)}
-              />
-            </div>
+      <EditTableRow number={1}>
+        <EditTableInnerRow>
+          <div className="px-2 py-1">헤더 텍스트 컬러</div>
+          <ColorInput
+            value={themeValues["HeaderStyle-Main"]["-ios-text-color"]}
+            onChange={(value) => handleChange("HeaderStyle-Main", "-ios-text-color", value)}
+          />
+          <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">
+            <RotateCw className="w-5 h-5" />
           </div>
-        </div>
+        </EditTableInnerRow>
+      </EditTableRow>
+
+      <div className="mt-4">
+        <SectionHeader title="ChattingList" subtitle="채팅 목록" />
+
+        <EditTableRow number={2}>
+          <EditTableInnerRow>
+            <div className="px-2 py-1">설명/라스트메시지 컬러</div>
+            <ColorInput
+              value={themeValues["MainViewStyle-Primary"]["-ios-paragraph-text-color"]}
+              onChange={(value) => handleChange("MainViewStyle-Primary", "-ios-paragraph-text-color", value)}
+            />
+            <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">
+              <RotateCw className="w-5 h-5" />
+            </div>
+          </EditTableInnerRow>
+          <EditTableInnerRow>
+            <div className="px-2 py-1">설명/라스트메시지 프레스 컬러</div>
+            <ColorInput
+              value={themeValues["MainViewStyle-Primary"]["-ios-paragraph-highlighted-text-color"]}
+              onChange={(value) =>
+                handleChange("MainViewStyle-Primary", "-ios-paragraph-highlighted-text-color", value)
+              }
+            />
+            <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">
+              <RotateCw className="w-5 h-5" />
+            </div>
+          </EditTableInnerRow>
+        </EditTableRow>
+
+        <EditTableRow number={3}>
+          <EditTableInnerRow>
+            <div className="px-2 py-1">리스트 배경 컬러</div>
+            <ColorInput
+              value={themeValues["MainViewStyle-Primary"]["-ios-normal-background-color"]}
+              onChange={(value) => handleChange("MainViewStyle-Primary", "-ios-normal-background-color", value)}
+            />
+            <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">
+              <RotateCw className="w-5 h-5" />
+            </div>
+          </EditTableInnerRow>
+          <EditTableInnerRow>
+            <div className="px-2 py-1">리스트 배경 투명도</div>
+            <AlphaInput
+              value={themeValues["MainViewStyle-Primary"]["-ios-normal-background-alpha"]}
+              onChange={(value) => handleChange("MainViewStyle-Primary", "-ios-normal-background-alpha", value)}
+            />
+          </EditTableInnerRow>
+        </EditTableRow>
+
+        <EditTableRow number={4}>
+          <EditTableInnerRow>
+            <div className="px-2 py-1">리스트 배경 프레스 컬러</div>
+            <ColorInput
+              value={themeValues["MainViewStyle-Primary"]["-ios-selected-background-color"]}
+              onChange={(value) => handleChange("MainViewStyle-Primary", "-ios-selected-background-color", value)}
+            />
+            <div className="p-1 bg-gray-100 w-fit rounded-md ml-auto mr-4">
+              <RotateCw className="w-5 h-5" />
+            </div>
+          </EditTableInnerRow>
+          <EditTableInnerRow>
+            <div className="px-2 py-1">리스트 배경 프레스 투명도</div>
+            <AlphaInput
+              value={themeValues["MainViewStyle-Primary"]["-ios-selected-background-alpha"]}
+              onChange={(value) => handleChange("MainViewStyle-Primary", "-ios-selected-background-alpha", value)}
+            />
+          </EditTableInnerRow>
+        </EditTableRow>
       </div>
     </div>
   );

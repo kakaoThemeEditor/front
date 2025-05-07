@@ -18,12 +18,7 @@ export function ThemeStyleDropDown() {
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm">
           <span className="font-bold text-xs">{currentStyle}</span>
-          <ChevronDown
-            className="-me-1 ms-2 opacity-60"
-            size={16}
-            strokeWidth={2}
-            aria-hidden="true"
-          />
+          <ChevronDown className="-me-1 ms-2 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
@@ -55,20 +50,7 @@ export function ThemeStyleDropDown() {
         >
           메인뷰3
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          className="text-xs"
-          checked={currentStyle === "Feature"}
-          onCheckedChange={() => setCurrentStyle("Feature")}
-        >
-          기능
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          className="text-xs"
-          checked={currentStyle === "DefaultProfile"}
-          onCheckedChange={() => setCurrentStyle("DefaultProfile")}
-        >
-          기본프로필
-        </DropdownMenuCheckboxItem>
+
         <DropdownMenuCheckboxItem
           className="text-xs"
           checked={currentStyle === "Chat"}
@@ -97,19 +79,13 @@ export function ThemeStyleDropDown() {
         >
           메시지알림바
         </DropdownMenuCheckboxItem>
+
         <DropdownMenuCheckboxItem
           className="text-xs"
-          checked={currentStyle === "DirectShareBar"}
-          onCheckedChange={() => setCurrentStyle("DirectShareBar")}
+          checked={currentStyle === "AddFriend"}
+          onCheckedChange={() => setCurrentStyle("AddFriend")}
         >
-          직접공유바
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          className="text-xs"
-          checked={currentStyle === "BottomBannerStyle"}
-          onCheckedChange={() => setCurrentStyle("BottomBannerStyle")}
-        >
-          바텀배너스타일
+          친구추가
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>

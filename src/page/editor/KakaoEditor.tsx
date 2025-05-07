@@ -1,9 +1,9 @@
 import PassCode from "@/components/kakaoScreens/passcode/PassCode";
 import TabBar from "@/components/kakaoScreens/tabbar/TabBar";
-import MainviewStyle1 from "@/components/kakaoScreens/MainviewStyle1";
+import MainviewStyle1 from "@/components/kakaoScreens/MainViewStyle1/MainviewStyle1";
 import MainviewStyle2 from "@/components/kakaoScreens/MainViewStyle2/MainviewStyle2";
 import { useEditorStore } from "@/store/editorStore";
-import ChattingStyle from "@/components/kakaoScreens/chatting/ChattingStyle";
+import Chatting from "@/components/kakaoScreens/chatting/Chatting";
 export const KakaoEditor = () => {
   const { currentStyle } = useEditorStore();
 
@@ -17,7 +17,7 @@ export const KakaoEditor = () => {
     // 다른 스타일들도 필요에 따라 추가
   };
 
-  const currentScreen = screenMap[currentStyle] || "Passcode";
+  const currentScreen = screenMap[currentStyle] || "TabBar";
 
   function renderMatches(screen: string) {
     switch (screen) {
@@ -32,7 +32,7 @@ export const KakaoEditor = () => {
       case "Mainview3":
         return <MainviewStyle2 />;
       case "Chat":
-        return <ChattingStyle />;
+        return <Chatting />;
       default:
         return null;
     }
